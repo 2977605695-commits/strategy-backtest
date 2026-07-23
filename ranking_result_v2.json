@@ -1,0 +1,2915 @@
+{
+  "methodology": {
+    "approach": "股价涨幅多窗口测试 (20-360日)",
+    "ic_method": "Spearman秩相关截面IC",
+    "spread_method": "五分组多空价差",
+    "windows": [
+      20,
+      40,
+      60,
+      90,
+      120,
+      180,
+      360
+    ],
+    "selected_factors": [
+      {
+        "factor": "GrossMargin_level",
+        "window": 360,
+        "mean_ic": 0.21511709724353378,
+        "icir": 1.0305478744494685,
+        "t_stat_ic": 9.667395983140647,
+        "mean_spread": 0.16155567304465035,
+        "annualized_spread": 0.11308897113125524,
+        "t_stat_spread": 6.4217650986384465,
+        "direction": "正向"
+      },
+      {
+        "factor": "BPS_level",
+        "window": 40,
+        "mean_ic": 0.13460092874338675,
+        "icir": 0.836037042872333,
+        "t_stat_ic": 8.062449264714074,
+        "mean_spread": 0.04630498608624711,
+        "annualized_spread": 0.2917214123433568,
+        "t_stat_spread": 3.4931646053111907,
+        "direction": "正向"
+      },
+      {
+        "factor": "RevGrowth_level",
+        "window": 360,
+        "mean_ic": 0.07980637839836442,
+        "icir": 0.36404002100678995,
+        "t_stat_ic": 3.4149981034734,
+        "mean_spread": 0.1574099231904841,
+        "annualized_spread": 0.11018694623333887,
+        "t_stat_spread": 3.86559226407134,
+        "direction": "正向"
+      }
+    ],
+    "normalization": "截面Z-Score",
+    "weighting": "IC绝对值占比加权"
+  },
+  "ranking": [
+    {
+      "code": "688498",
+      "name": "源杰科技",
+      "sector": "模拟与光芯片设计",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 77.8078616274,
+        "GrossMargin_raw": 77.8078616274,
+        "BPS_level": 29.375184136344,
+        "BPS_raw": 29.375184136344,
+        "RevGrowth_level": 320.9399426311,
+        "RevGrowth_raw": 320.9399426311,
+        "GrossMargin_level_z": 2.2252521089163686,
+        "BPS_level_z": 1.3138316629854097,
+        "RevGrowth_level_z": 4.603399196760194
+      },
+      "composite_score": 2.381502294461619,
+      "score_parts": {
+        "GrossMargin_level": 1.1144646716645106,
+        "BPS_level": 0.41171807758721823,
+        "RevGrowth_level": 0.8553195452098903
+      },
+      "rank": 1
+    },
+    {
+      "code": "688795",
+      "name": "摩尔线程 - U",
+      "sector": "AI/GPU 算力芯片",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 67.3514013135,
+        "GrossMargin_raw": 67.3514013135,
+        "BPS_level": 24.508130693737,
+        "BPS_raw": 24.508130693737,
+        "RevGrowth_level": 155.3483184294,
+        "RevGrowth_raw": 155.3483184294,
+        "GrossMargin_level_z": 1.6728339029208197,
+        "BPS_level_z": 0.832199169063214,
+        "RevGrowth_level_z": 1.8190337903175127
+      },
+      "composite_score": 1.436566693561571,
+      "score_parts": {
+        "GrossMargin_level": 0.8377991324658394,
+        "BPS_level": 0.26078793174905535,
+        "RevGrowth_level": 0.3379796293466763
+      },
+      "rank": 2
+    },
+    {
+      "code": "603986",
+      "name": "兆易创新",
+      "sector": "存储芯片与模组",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 57.0767184326,
+        "GrossMargin_raw": 57.0767184326,
+        "BPS_level": 36.047950793414,
+        "BPS_raw": 36.047950793414,
+        "RevGrowth_level": 119.3786758368,
+        "RevGrowth_raw": 119.3786758368,
+        "GrossMargin_level_z": 1.1300190579493494,
+        "BPS_level_z": 1.9741534129524783,
+        "RevGrowth_level_z": 1.2142167954980703
+      },
+      "composite_score": 1.4101912284758327,
+      "score_parts": {
+        "GrossMargin_level": 0.5659432085676958,
+        "BPS_level": 0.6186444359212147,
+        "RevGrowth_level": 0.22560358398692243
+      },
+      "rank": 3
+    },
+    {
+      "code": "688256",
+      "name": "寒武纪",
+      "sector": "AI/GPU 算力芯片",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 54.3303762465,
+        "GrossMargin_raw": 54.3303762465,
+        "BPS_level": 30.523510402132,
+        "BPS_raw": 30.523510402132,
+        "RevGrowth_level": 159.5554734937,
+        "RevGrowth_raw": 159.5554734937,
+        "GrossMargin_level_z": 0.984928905263693,
+        "BPS_level_z": 1.4274674078461829,
+        "RevGrowth_level_z": 1.8897756353658373
+      },
+      "composite_score": 1.2917301781179342,
+      "score_parts": {
+        "GrossMargin_level": 0.49327825131333963,
+        "BPS_level": 0.44732834010209627,
+        "RevGrowth_level": 0.3511235867024983
+      },
+      "rank": 4
+    },
+    {
+      "code": "002371",
+      "name": "北方华创",
+      "sector": "刻蚀与制程设备",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 40.7727895045,
+        "GrossMargin_raw": 40.7727895045,
+        "BPS_level": 54.211649872044,
+        "BPS_raw": 54.211649872044,
+        "RevGrowth_level": 25.7960902419,
+        "RevGrowth_raw": 25.7960902419,
+        "GrossMargin_level_z": 0.2686771794584712,
+        "BPS_level_z": 3.7715915938258187,
+        "RevGrowth_level_z": -0.35934174184989365
+      },
+      "composite_score": 1.2497055296641517,
+      "score_parts": {
+        "GrossMargin_level": 0.13456058456888553,
+        "BPS_level": 1.1819112632173814,
+        "RevGrowth_level": -0.06676631812211523
+      },
+      "rank": 5
+    },
+    {
+      "code": "688802",
+      "name": "沐曦股份 - U",
+      "sector": "AI/GPU 算力芯片",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 60.0519659997,
+        "GrossMargin_raw": 60.0519659997,
+        "BPS_level": 32.738074517171,
+        "BPS_raw": 32.738074517171,
+        "RevGrowth_level": 75.3713191255,
+        "RevGrowth_raw": 75.3713191255,
+        "GrossMargin_level_z": 1.287202356510255,
+        "BPS_level_z": 1.6466156153303224,
+        "RevGrowth_level_z": 0.47424844114051357
+      },
+      "composite_score": 1.2487841684350571,
+      "score_parts": {
+        "GrossMargin_level": 0.6446647307358646,
+        "BPS_level": 0.5160032557964189,
+        "RevGrowth_level": 0.08811618190277366
+      },
+      "rank": 6
+    },
+    {
+      "code": "300308",
+      "name": "中际旭创",
+      "sector": "高速光模块",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 46.0581330258,
+        "GrossMargin_raw": 46.0581330258,
+        "BPS_level": 32.028176069571,
+        "BPS_raw": 32.028176069571,
+        "RevGrowth_level": 192.1169094233,
+        "RevGrowth_raw": 192.1169094233,
+        "GrossMargin_level_z": 0.5479036001072922,
+        "BPS_level_z": 1.5763656861316941,
+        "RevGrowth_level_z": 2.4372848238501863
+      },
+      "composite_score": 1.2212451422507447,
+      "score_parts": {
+        "GrossMargin_level": 0.27440450605604866,
+        "BPS_level": 0.49398889382361066,
+        "RevGrowth_level": 0.4528517423710854
+      },
+      "rank": 7
+    },
+    {
+      "code": "002466",
+      "name": "天齐锂业",
+      "sector": "锂矿与锂电材料",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 62.6560605658,
+        "GrossMargin_raw": 62.6560605658,
+        "BPS_level": 27.166035004095,
+        "BPS_raw": 27.166035004095,
+        "RevGrowth_level": 98.4382922726,
+        "RevGrowth_raw": 98.4382922726,
+        "GrossMargin_level_z": 1.4247775210748277,
+        "BPS_level_z": 1.095219309832119,
+        "RevGrowth_level_z": 0.8621115493850194
+      },
+      "composite_score": 1.2169588876153685,
+      "score_parts": {
+        "GrossMargin_level": 0.7135659846617899,
+        "BPS_level": 0.34321108364511044,
+        "RevGrowth_level": 0.16018181930846812
+      },
+      "rank": 8
+    },
+    {
+      "code": "301308",
+      "name": "江波龙",
+      "sector": "存储芯片与模组",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 55.5274284884,
+        "GrossMargin_raw": 55.5274284884,
+        "BPS_level": 29.069413675235,
+        "BPS_raw": 29.069413675235,
+        "RevGrowth_level": 132.7928324203,
+        "RevGrowth_raw": 132.7928324203,
+        "GrossMargin_level_z": 1.048169565305629,
+        "BPS_level_z": 1.283573316433788,
+        "RevGrowth_level_z": 1.4397711599036538
+      },
+      "composite_score": 1.1946987681375236,
+      "score_parts": {
+        "GrossMargin_level": 0.5249508340050171,
+        "BPS_level": 0.40223595851201377,
+        "RevGrowth_level": 0.26751197562049284
+      },
+      "rank": 9
+    },
+    {
+      "code": "600276",
+      "name": "恒瑞医药",
+      "sector": "创新药研发",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 86.5986071559,
+        "GrossMargin_raw": 86.5986071559,
+        "BPS_level": 9.586311329774,
+        "BPS_raw": 9.586311329774,
+        "RevGrowth_level": 12.9753629793,
+        "RevGrowth_raw": 12.9753629793,
+        "GrossMargin_level_z": 2.6896700599663963,
+        "BPS_level_z": -0.6444299986396257,
+        "RevGrowth_level_z": -0.5749177991988953
+      },
+      "composite_score": 1.0382903218811286,
+      "score_parts": {
+        "GrossMargin_level": 1.3470573730749222,
+        "BPS_level": -0.20194632817460637,
+        "RevGrowth_level": -0.10682072301918732
+      },
+      "rank": 10
+    },
+    {
+      "code": "688008",
+      "name": "澜起科技",
+      "sector": "网络与接口芯片",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 69.7882209522,
+        "GrossMargin_raw": 69.7882209522,
+        "BPS_level": 17.055877920673,
+        "BPS_raw": 17.055877920673,
+        "RevGrowth_level": 19.514563386,
+        "RevGrowth_raw": 19.514563386,
+        "GrossMargin_level_z": 1.801571878558323,
+        "BPS_level_z": 0.09474125314872146,
+        "RevGrowth_level_z": -0.4649634250813156
+      },
+      "composite_score": 0.8455727379018755,
+      "score_parts": {
+        "GrossMargin_level": 0.9022744901903497,
+        "BPS_level": 0.029689257546100686,
+        "RevGrowth_level": -0.08639100983457482
+      },
+      "rank": 11
+    },
+    {
+      "code": "688012",
+      "name": "中微公司",
+      "sector": "刻蚀与制程设备",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 39.8925648403,
+        "GrossMargin_raw": 39.8925648403,
+        "BPS_level": 38.823724017131,
+        "BPS_raw": 38.823724017131,
+        "RevGrowth_level": 34.1285376976,
+        "RevGrowth_raw": 34.1285376976,
+        "GrossMargin_level_z": 0.22217462359604295,
+        "BPS_level_z": 2.248837592213343,
+        "RevGrowth_level_z": -0.21923454404626078
+      },
+      "composite_score": 0.7752594968626474,
+      "score_parts": {
+        "GrossMargin_level": 0.1112708838454834,
+        "BPS_level": 0.7047227710801701,
+        "RevGrowth_level": -0.040734158063006176
+      },
+      "rank": 12
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "sector": "医药研发外包",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 50.4025925161,
+        "GrossMargin_raw": 50.4025925161,
+        "BPS_level": 28.226746064983,
+        "BPS_raw": 28.226746064983,
+        "RevGrowth_level": 28.8068135055,
+        "RevGrowth_raw": 28.8068135055,
+        "GrossMargin_level_z": 0.7774228107776134,
+        "BPS_level_z": 1.2001848541004598,
+        "RevGrowth_level_z": -0.30871748024274176
+      },
+      "composite_score": 0.7080978572099851,
+      "score_parts": {
+        "GrossMargin_level": 0.3893537519124922,
+        "BPS_level": 0.3761043479167733,
+        "RevGrowth_level": -0.057360242619280376
+      },
+      "rank": 13
+    },
+    {
+      "code": "300502",
+      "name": "新易盛",
+      "sector": "高速光模块",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 49.1609551491,
+        "GrossMargin_raw": 49.1609551491,
+        "BPS_level": 20.501498206035,
+        "BPS_raw": 20.501498206035,
+        "RevGrowth_level": 105.759481459,
+        "RevGrowth_raw": 105.759481459,
+        "GrossMargin_level_z": 0.7118267040469837,
+        "BPS_level_z": 0.435711967918374,
+        "RevGrowth_level_z": 0.9852147920937478
+      },
+      "composite_score": 0.6760960527459365,
+      "score_parts": {
+        "GrossMargin_level": 0.356501499685835,
+        "BPS_level": 0.13653993800504777,
+        "RevGrowth_level": 0.18305461505505374
+      },
+      "rank": 14
+    },
+    {
+      "code": "688627",
+      "name": "精智达",
+      "sector": "半导体测试设备",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 43.2299345451,
+        "GrossMargin_raw": 43.2299345451,
+        "BPS_level": 18.529323939855,
+        "BPS_raw": 18.529323939855,
+        "RevGrowth_level": 118.8401694313,
+        "RevGrowth_raw": 118.8401694313,
+        "GrossMargin_level_z": 0.39848895270211193,
+        "BPS_level_z": 0.24055010633818516,
+        "RevGrowth_level_z": 1.205161998108103
+      },
+      "composite_score": 0.4988765871646932,
+      "score_parts": {
+        "GrossMargin_level": 0.19957372832301604,
+        "BPS_level": 0.07538167189540351,
+        "RevGrowth_level": 0.2239211869462736
+      },
+      "rank": 15
+    },
+    {
+      "code": "688072",
+      "name": "拓荆科技",
+      "sector": "薄膜沉积设备",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 41.6890753169,
+        "GrossMargin_raw": 41.6890753169,
+        "BPS_level": 25.667963468878,
+        "BPS_raw": 25.667963468878,
+        "RevGrowth_level": 56.9673418563,
+        "RevGrowth_raw": 56.9673418563,
+        "GrossMargin_level_z": 0.31708485753212284,
+        "BPS_level_z": 0.9469735718124559,
+        "RevGrowth_level_z": 0.16479198223833785
+      },
+      "composite_score": 0.48617807405839686,
+      "score_parts": {
+        "GrossMargin_level": 0.1588044205073963,
+        "BPS_level": 0.2967550177825602,
+        "RevGrowth_level": 0.03061863576844039
+      },
+      "rank": 16
+    },
+    {
+      "code": "300604",
+      "name": "长川科技",
+      "sector": "半导体测试设备",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 56.8082975489,
+        "GrossMargin_raw": 56.8082975489,
+        "BPS_level": 8.02807499395,
+        "BPS_raw": 8.02807499395,
+        "RevGrowth_level": 69.0854419545,
+        "RevGrowth_raw": 69.0854419545,
+        "GrossMargin_level_z": 1.1158382951889168,
+        "BPS_level_z": -0.798629507930631,
+        "RevGrowth_level_z": 0.36855360887797395
+      },
+      "composite_score": 0.37705086994266007,
+      "score_parts": {
+        "GrossMargin_level": 0.5588411103153526,
+        "BPS_level": -0.2502681393463091,
+        "RevGrowth_level": 0.06847789897361661
+      },
+      "rank": 17
+    },
+    {
+      "code": "002460",
+      "name": "赣锋锂业",
+      "sector": "锂矿与锂电材料",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 29.7186730029,
+        "GrossMargin_raw": 29.7186730029,
+        "BPS_level": 22.158040900747,
+        "BPS_raw": 22.158040900747,
+        "RevGrowth_level": 143.8134944996,
+        "RevGrowth_raw": 143.8134944996,
+        "GrossMargin_level_z": -0.3153153977009496,
+        "BPS_level_z": 0.5996396499853653,
+        "RevGrowth_level_z": 1.625079749016355
+      },
+      "composite_score": 0.33193469021005784,
+      "score_parts": {
+        "GrossMargin_level": -0.15791822857351587,
+        "BPS_level": 0.18791028629653958,
+        "RevGrowth_level": 0.3019426324870341
+      },
+      "rank": 18
+    },
+    {
+      "code": "300394",
+      "name": "天孚通信",
+      "sector": "光无源器件与光引擎",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 56.6039337232,
+        "GrossMargin_raw": 56.6039337232,
+        "BPS_level": 7.691983663774,
+        "BPS_raw": 7.691983663774,
+        "RevGrowth_level": 40.8242783073,
+        "RevGrowth_raw": 40.8242783073,
+        "GrossMargin_level_z": 1.1050416876779114,
+        "BPS_level_z": -0.8318883384421755,
+        "RevGrowth_level_z": -0.10664800101281972
+      },
+      "composite_score": 0.2729279763853534,
+      "score_parts": {
+        "GrossMargin_level": 0.5534338858500301,
+        "BPS_level": -0.2606905261305468,
+        "RevGrowth_level": -0.01981538333412989
+      },
+      "rank": 19
+    },
+    {
+      "code": "688502",
+      "name": "茂莱光学",
+      "sector": "精密光学元件",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 40.3571139238,
+        "GrossMargin_raw": 40.3571139238,
+        "BPS_level": 22.592527310606,
+        "BPS_raw": 22.592527310606,
+        "RevGrowth_level": 28.631582016,
+        "RevGrowth_raw": 28.631582016,
+        "GrossMargin_level_z": 0.24671690306731017,
+        "BPS_level_z": 0.6426354328801595,
+        "RevGrowth_level_z": -0.3116639366220144
+      },
+      "composite_score": 0.26703856383388547,
+      "score_parts": {
+        "GrossMargin_level": 0.12356230166877168,
+        "BPS_level": 0.2013839614837988,
+        "RevGrowth_level": -0.05790769931868501
+      },
+      "rank": 20
+    },
+    {
+      "code": "600900",
+      "name": "长江电力",
+      "sector": "水电运营",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 55.6463177522,
+        "GrossMargin_raw": 55.6463177522,
+        "BPS_level": 9.314273015217,
+        "BPS_raw": 9.314273015217,
+        "RevGrowth_level": 6.4427781703,
+        "RevGrowth_raw": 6.4427781703,
+        "GrossMargin_level_z": 1.0544505238565092,
+        "BPS_level_z": -0.6713502890016518,
+        "RevGrowth_level_z": -0.6847609343485163
+      },
+      "composite_score": 0.1904843412686427,
+      "score_parts": {
+        "GrossMargin_level": 0.5280965029299434,
+        "BPS_level": -0.21038239385044646,
+        "RevGrowth_level": -0.12722976781085424
+      },
+      "rank": 21
+    },
+    {
+      "code": "601995",
+      "name": "中金公司",
+      "sector": "头部券商",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": null,
+        "GrossMargin_raw": null,
+        "BPS_level": 21.268489426074,
+        "BPS_raw": 21.268489426074,
+        "RevGrowth_level": 54.261391239,
+        "RevGrowth_raw": 54.261391239,
+        "GrossMargin_level_z": null,
+        "BPS_level_z": 0.5116116674963475,
+        "RevGrowth_level_z": 0.11929236638110659
+      },
+      "composite_score": 0.18248950823780807,
+      "score_parts": {
+        "GrossMargin_level": null,
+        "BPS_level": 0.1603247799144619,
+        "RevGrowth_level": 0.02216472832334617
+      },
+      "rank": 22
+    },
+    {
+      "code": "301392",
+      "name": "汇成真空",
+      "sector": "自动化与真空设备",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 55.9543281111,
+        "GrossMargin_raw": 55.9543281111,
+        "BPS_level": 7.5725513667,
+        "BPS_raw": 7.5725513667,
+        "RevGrowth_level": 16.5590965808,
+        "RevGrowth_raw": 16.5590965808,
+        "GrossMargin_level_z": 1.0707228114934064,
+        "BPS_level_z": -0.8437070858163147,
+        "RevGrowth_level_z": -0.5146585686126397
+      },
+      "composite_score": 0.1762274473281989,
+      "score_parts": {
+        "GrossMargin_level": 0.53624609174544,
+        "BPS_level": -0.26439419082782817,
+        "RevGrowth_level": -0.09562445358941296
+      },
+      "rank": 23
+    },
+    {
+      "code": "300661",
+      "name": "圣邦股份",
+      "sector": "模拟与光芯片设计",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 51.6282847702,
+        "GrossMargin_raw": 51.6282847702,
+        "BPS_level": 8.813017869103,
+        "BPS_raw": 8.813017869103,
+        "RevGrowth_level": 39.0811972314,
+        "RevGrowth_raw": 39.0811972314,
+        "GrossMargin_level_z": 0.8421765319974496,
+        "BPS_level_z": -0.7209533535582853,
+        "RevGrowth_level_z": -0.13595730135792153
+      },
+      "composite_score": 0.1705964070353356,
+      "score_parts": {
+        "GrossMargin_level": 0.42178411536172067,
+        "BPS_level": -0.22592660621573984,
+        "RevGrowth_level": -0.025261102110645216
+      },
+      "rank": 24
+    },
+    {
+      "code": "688037",
+      "name": "芯源微",
+      "sector": "涂胶显影设备",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 46.6892680179,
+        "GrossMargin_raw": 46.6892680179,
+        "BPS_level": 13.891574790102,
+        "BPS_raw": 13.891574790102,
+        "RevGrowth_level": 20.0751144363,
+        "RevGrowth_raw": 20.0751144363,
+        "GrossMargin_level_z": 0.5812466674178839,
+        "BPS_level_z": -0.21839095841918513,
+        "RevGrowth_level_z": -0.4555379546776959
+      },
+      "composite_score": 0.13802623332672753,
+      "score_parts": {
+        "GrossMargin_level": 0.29110358946043735,
+        "BPS_level": -0.06843761502783599,
+        "RevGrowth_level": -0.08463974110587384
+      },
+      "rank": 25
+    },
+    {
+      "code": "601869",
+      "name": "长飞光纤",
+      "sector": "光纤光缆",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 41.5145642697,
+        "GrossMargin_raw": 41.5145642697,
+        "BPS_level": 17.190316820705,
+        "BPS_raw": 17.190316820705,
+        "RevGrowth_level": 27.7014158526,
+        "RevGrowth_raw": 27.7014158526,
+        "GrossMargin_level_z": 0.30786538203787,
+        "BPS_level_z": 0.10804501968141138,
+        "RevGrowth_level_z": -0.3273043562392518
+      },
+      "composite_score": 0.12723163447190394,
+      "score_parts": {
+        "GrossMargin_level": 0.15418706515765795,
+        "BPS_level": 0.03385828569165626,
+        "RevGrowth_level": -0.06081371637741028
+      },
+      "rank": 26
+    },
+    {
+      "code": "300054",
+      "name": "鼎龙股份",
+      "sector": "半导体工艺材料",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 54.9470617542,
+        "GrossMargin_raw": 54.9470617542,
+        "BPS_level": 5.760869119037,
+        "BPS_raw": 5.760869119037,
+        "RevGrowth_level": 23.8179386419,
+        "RevGrowth_raw": 23.8179386419,
+        "GrossMargin_level_z": 1.0175086016045503,
+        "BPS_level_z": -1.0229870237553396,
+        "RevGrowth_level_z": -0.39260367107060296
+      },
+      "composite_score": 0.11607306980589531,
+      "score_parts": {
+        "GrossMargin_level": 0.5095950184966878,
+        "BPS_level": -0.32057550649994926,
+        "RevGrowth_level": -0.07294644219084319
+      },
+      "rank": 27
+    },
+    {
+      "code": "600030",
+      "name": "中信证券",
+      "sector": "头部券商",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": null,
+        "GrossMargin_raw": null,
+        "BPS_level": 19.669270676257,
+        "BPS_raw": 19.669270676257,
+        "RevGrowth_level": 40.9138156047,
+        "RevGrowth_raw": 40.9138156047,
+        "GrossMargin_level_z": null,
+        "BPS_level_z": 0.3533566321070241,
+        "RevGrowth_level_z": -0.10514246258556653
+      },
+      "composite_score": 0.09119642866500427,
+      "score_parts": {
+        "GrossMargin_level": null,
+        "BPS_level": 0.11073208035131173,
+        "RevGrowth_level": -0.019535651686307453
+      },
+      "rank": 28
+    },
+    {
+      "code": "300373",
+      "name": "扬杰科技",
+      "sector": "功率半导体器件",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 36.8127358837,
+        "GrossMargin_raw": 36.8127358837,
+        "BPS_level": 18.237832419146,
+        "BPS_raw": 18.237832419146,
+        "RevGrowth_level": 34.8678303331,
+        "RevGrowth_raw": 34.8678303331,
+        "GrossMargin_level_z": 0.059466256146259965,
+        "BPS_level_z": 0.21170477112011732,
+        "RevGrowth_level_z": -0.2068035962284127
+      },
+      "composite_score": 0.05770014674490889,
+      "score_parts": {
+        "GrossMargin_level": 0.029782262138123437,
+        "BPS_level": 0.06634235103114934,
+        "RevGrowth_level": -0.03842446642436388
+      },
+      "rank": 29
+    },
+    {
+      "code": "300476",
+      "name": "胜宏科技",
+      "sector": "PCB 印制电路板",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 34.4584933385,
+        "GrossMargin_raw": 34.4584933385,
+        "BPS_level": 19.946167475293,
+        "BPS_raw": 19.946167475293,
+        "RevGrowth_level": 27.9927826495,
+        "RevGrowth_raw": 27.9927826495,
+        "GrossMargin_level_z": -0.06490914473093388,
+        "BPS_level_z": 0.38075770699790235,
+        "RevGrowth_level_z": -0.32240512517134345
+      },
+      "composite_score": 0.026907176062754896,
+      "score_parts": {
+        "GrossMargin_level": -0.03250820362363856,
+        "BPS_level": 0.11931881044446603,
+        "RevGrowth_level": -0.05990343075807258
+      },
+      "rank": 30
+    },
+    {
+      "code": "601088",
+      "name": "中国神华",
+      "sector": "煤炭开采运营",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 32.8891856187,
+        "GrossMargin_raw": 32.8891856187,
+        "BPS_level": 22.650115191411,
+        "BPS_raw": 22.650115191411,
+        "RevGrowth_level": 1.1669181576,
+        "RevGrowth_raw": 1.1669181576,
+        "GrossMargin_level_z": -0.14781618298311133,
+        "BPS_level_z": 0.648334198052738,
+        "RevGrowth_level_z": -0.7734726803647457
+      },
+      "composite_score": -0.014572993667013812,
+      "score_parts": {
+        "GrossMargin_level": -0.07403022478886487,
+        "BPS_level": 0.2031697950175588,
+        "RevGrowth_level": -0.14371256389570775
+      },
+      "rank": 31
+    },
+    {
+      "code": "300666",
+      "name": "江丰电子",
+      "sector": "半导体基础材料",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 32.8560172586,
+        "GrossMargin_raw": 32.8560172586,
+        "BPS_level": 19.535498828374,
+        "BPS_raw": 19.535498828374,
+        "RevGrowth_level": 30.491722602,
+        "RevGrowth_raw": 30.491722602,
+        "GrossMargin_level_z": -0.14956847825629277,
+        "BPS_level_z": 0.3401188755316701,
+        "RevGrowth_level_z": -0.2803863214422169
+      },
+      "composite_score": -0.020420346618495046,
+      "score_parts": {
+        "GrossMargin_level": -0.07490782026151288,
+        "BPS_level": 0.10658373787919637,
+        "RevGrowth_level": -0.05209626423617853
+      },
+      "rank": 32
+    },
+    {
+      "code": "688727",
+      "name": "恒坤新材",
+      "sector": "半导体工艺材料",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 51.12307317,
+        "GrossMargin_raw": 51.12307317,
+        "BPS_level": 5.628389881679,
+        "BPS_raw": 5.628389881679,
+        "RevGrowth_level": 0.1045999514,
+        "RevGrowth_raw": 0.1045999514,
+        "GrossMargin_level_z": 0.8154860385175837,
+        "BPS_level_z": -1.0360968665450392,
+        "RevGrowth_level_z": -0.7913351904901048
+      },
+      "composite_score": -0.0632983980215269,
+      "score_parts": {
+        "GrossMargin_level": 0.4084168155697489,
+        "BPS_level": -0.3246837643711144,
+        "RevGrowth_level": -0.1470314492201614
+      },
+      "rank": 33
+    },
+    {
+      "code": "688702",
+      "name": "盛科通信 - U",
+      "sector": "网络与接口芯片",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 49.446850007,
+        "GrossMargin_raw": 49.446850007,
+        "BPS_level": 5.443519241512,
+        "BPS_raw": 5.443519241512,
+        "RevGrowth_level": 11.399610079,
+        "RevGrowth_raw": 11.399610079,
+        "GrossMargin_level_z": 0.7269306225589229,
+        "BPS_level_z": -1.0543912429118891,
+        "RevGrowth_level_z": -0.6014135346314607
+      },
+      "composite_score": -0.07809444797257993,
+      "score_parts": {
+        "GrossMargin_level": 0.36406593857247105,
+        "BPS_level": -0.33041670998402595,
+        "RevGrowth_level": -0.11174367656102503
+      },
+      "rank": 34
+    },
+    {
+      "code": "301629",
+      "name": "矽电股份",
+      "sector": "设备零部件与耗材",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 31.0758913349,
+        "GrossMargin_raw": 31.0758913349,
+        "BPS_level": 28.341440109411,
+        "BPS_raw": 28.341440109411,
+        "RevGrowth_level": -66.0264583696,
+        "RevGrowth_raw": -66.0264583696,
+        "GrossMargin_level_z": -0.24361311092317167,
+        "BPS_level_z": 1.2115347148133702,
+        "RevGrowth_level_z": -1.9033058711819695
+      },
+      "composite_score": -0.09598429238474998,
+      "score_parts": {
+        "GrossMargin_level": -0.12200784108474524,
+        "BPS_level": 0.37966107665550974,
+        "RevGrowth_level": -0.35363752795551445
+      },
+      "rank": 35
+    },
+    {
+      "code": "300757",
+      "name": "罗博特科",
+      "sector": "自动化与真空设备",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 36.3113939359,
+        "GrossMargin_raw": 36.3113939359,
+        "BPS_level": 9.699109380154,
+        "BPS_raw": 9.699109380154,
+        "RevGrowth_level": 69.3255953076,
+        "RevGrowth_raw": 69.3255953076,
+        "GrossMargin_level_z": 0.0329801976637509,
+        "BPS_level_z": -0.633267761167875,
+        "RevGrowth_level_z": 0.37259170375044387
+      },
+      "composite_score": -0.11270286255370765,
+      "score_parts": {
+        "GrossMargin_level": 0.016517348759490232,
+        "BPS_level": -0.19844839530929662,
+        "RevGrowth_level": 0.06922818399609873
+      },
+      "rank": 36
+    },
+    {
+      "code": "300620",
+      "name": "光库科技",
+      "sector": "光无源器件与光引擎",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 36.6330601678,
+        "GrossMargin_raw": 36.6330601678,
+        "BPS_level": 8.847752199595,
+        "BPS_raw": 8.847752199595,
+        "RevGrowth_level": 60.7961025465,
+        "RevGrowth_raw": 60.7961025465,
+        "GrossMargin_level_z": 0.04997392952149358,
+        "BPS_level_z": -0.7175161235346472,
+        "RevGrowth_level_z": 0.22917125786133183
+      },
+      "composite_score": -0.1572408020292798,
+      "score_parts": {
+        "GrossMargin_level": 0.02502825577955665,
+        "BPS_level": -0.22484947451201637,
+        "RevGrowth_level": 0.04258041670317993
+      },
+      "rank": 37
+    },
+    {
+      "code": "688195",
+      "name": "腾景科技",
+      "sector": "精密光学元件",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 37.2200799262,
+        "GrossMargin_raw": 37.2200799262,
+        "BPS_level": 7.869227426208,
+        "BPS_raw": 7.869227426208,
+        "RevGrowth_level": 51.1714357439,
+        "RevGrowth_raw": 51.1714357439,
+        "GrossMargin_level_z": 0.08098637465918496,
+        "BPS_level_z": -0.8143487004784891,
+        "RevGrowth_level_z": 0.06733584243564256
+      },
+      "composite_score": -0.2021228758246461,
+      "score_parts": {
+        "GrossMargin_level": 0.04056010241814794,
+        "BPS_level": -0.25519409441297375,
+        "RevGrowth_level": 0.01251111617017968
+      },
+      "rank": 38
+    },
+    {
+      "code": "688347",
+      "name": "华虹宏力",
+      "sector": "晶圆代工制造",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 17.625466293,
+        "GrossMargin_raw": 17.625466293,
+        "BPS_level": 26.040080109042,
+        "BPS_raw": 26.040080109042,
+        "RevGrowth_level": 18.2191831331,
+        "RevGrowth_raw": 18.2191831331,
+        "GrossMargin_level_z": -0.9542034491896311,
+        "BPS_level_z": 0.9837973847303878,
+        "RevGrowth_level_z": -0.4867447922353115
+      },
+      "composite_score": -0.2600335916228721,
+      "score_parts": {
+        "GrossMargin_level": -0.4778901363316188,
+        "BPS_level": 0.3082945702923178,
+        "RevGrowth_level": -0.0904380255835711
+      },
+      "rank": 39
+    },
+    {
+      "code": "601398",
+      "name": "工商银行",
+      "sector": "国有大型银行",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": null,
+        "GrossMargin_raw": null,
+        "BPS_level": 11.062448268412,
+        "BPS_raw": 11.062448268412,
+        "RevGrowth_level": 8.2698074013,
+        "RevGrowth_raw": 8.2698074013,
+        "GrossMargin_level_z": null,
+        "BPS_level_z": -0.4983548582059761,
+        "RevGrowth_level_z": -0.6540400750545728
+      },
+      "composite_score": -0.2776922457910272,
+      "score_parts": {
+        "GrossMargin_level": null,
+        "BPS_level": -0.15617046685462152,
+        "RevGrowth_level": -0.12152177893640566
+      },
+      "rank": 40
+    },
+    {
+      "code": "688409",
+      "name": "富创精密",
+      "sector": "设备零部件与耗材",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 27.0536596705,
+        "GrossMargin_raw": 27.0536596705,
+        "BPS_level": 14.756918031241,
+        "BPS_raw": 14.756918031241,
+        "RevGrowth_level": 36.8383959188,
+        "RevGrowth_raw": 36.8383959188,
+        "GrossMargin_level_z": -0.4561089205417142,
+        "BPS_level_z": -0.13275856743700415,
+        "RevGrowth_level_z": -0.17366922319233247
+      },
+      "composite_score": -0.3023021833125977,
+      "score_parts": {
+        "GrossMargin_level": -0.22843132080989745,
+        "BPS_level": -0.04160281998699511,
+        "RevGrowth_level": -0.032268042515705114
+      },
+      "rank": 41
+    },
+    {
+      "code": "000657",
+      "name": "中钨高新",
+      "sector": "稀土与钨金属",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 30.4502645896,
+        "GrossMargin_raw": 30.4502645896,
+        "BPS_level": 4.688881623076,
+        "BPS_raw": 4.688881623076,
+        "RevGrowth_level": 106.4716284137,
+        "RevGrowth_raw": 106.4716284137,
+        "GrossMargin_level_z": -0.2766651757602597,
+        "BPS_level_z": -1.129068458286815,
+        "RevGrowth_level_z": 0.9971892947567264
+      },
+      "composite_score": -0.30710014397159546,
+      "score_parts": {
+        "GrossMargin_level": -0.13856118281124163,
+        "BPS_level": -0.3538184595535768,
+        "RevGrowth_level": 0.18527949839322297
+      },
+      "rank": 42
+    },
+    {
+      "code": "601899",
+      "name": "紫金矿业",
+      "sector": "工业金属铜金",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 36.3257532424,
+        "GrossMargin_raw": 36.3257532424,
+        "BPS_level": 7.418933205038,
+        "BPS_raw": 7.418933205038,
+        "RevGrowth_level": 24.7937696755,
+        "RevGrowth_raw": 24.7937696755,
+        "GrossMargin_level_z": 0.03373880450564024,
+        "BPS_level_z": -0.858908788280749,
+        "RevGrowth_level_z": -0.3761954125877977
+      },
+      "composite_score": -0.3221584593440544,
+      "score_parts": {
+        "GrossMargin_level": 0.016897278980241875,
+        "BPS_level": -0.26915797898352534,
+        "RevGrowth_level": -0.0698977593407709
+      },
+      "rank": 43
+    },
+    {
+      "code": "688503",
+      "name": "聚和材料",
+      "sector": "半导体高分子材料",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 10.5837133378,
+        "GrossMargin_raw": 10.5837133378,
+        "BPS_level": 21.91555056658,
+        "BPS_raw": 21.91555056658,
+        "RevGrowth_level": 87.535235235,
+        "RevGrowth_raw": 87.535235235,
+        "GrossMargin_level_z": -1.3262215526203291,
+        "BPS_level_z": 0.5756433602848107,
+        "RevGrowth_level_z": 0.6787804480305998
+      },
+      "composite_score": -0.3576974647508999,
+      "score_parts": {
+        "GrossMargin_level": -0.664206568448178,
+        "BPS_level": 0.1803905206042676,
+        "RevGrowth_level": 0.12611858309301047
+      },
+      "rank": 44
+    },
+    {
+      "code": "601288",
+      "name": "农业银行",
+      "sector": "国有大型银行",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": null,
+        "GrossMargin_raw": null,
+        "BPS_level": 8.076360851813,
+        "BPS_raw": 8.076360851813,
+        "RevGrowth_level": 10.4894093446,
+        "RevGrowth_raw": 10.4894093446,
+        "GrossMargin_level_z": null,
+        "BPS_level_z": -0.793851249705615,
+        "RevGrowth_level_z": -0.6167182425235407
+      },
+      "composite_score": -0.36335808473058395,
+      "score_parts": {
+        "GrossMargin_level": null,
+        "BPS_level": -0.24877076693092015,
+        "RevGrowth_level": -0.11458731779966383
+      },
+      "rank": 45
+    },
+    {
+      "code": "301165",
+      "name": "锐捷网络",
+      "sector": "网络交换设备",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 35.6968285004,
+        "GrossMargin_raw": 35.6968285004,
+        "BPS_level": 6.452911951116,
+        "BPS_raw": 6.452911951116,
+        "RevGrowth_level": 18.2616437069,
+        "RevGrowth_raw": 18.2616437069,
+        "GrossMargin_level_z": 0.0005125054281211029,
+        "BPS_level_z": -0.9545040454922833,
+        "RevGrowth_level_z": -0.4860308324961255
+      },
+      "composite_score": -0.3891635519598585,
+      "score_parts": {
+        "GrossMargin_level": 0.00025667617228117436,
+        "BPS_level": -0.29911485750489925,
+        "RevGrowth_level": -0.09030537062724046
+      },
+      "rank": 46
+    },
+    {
+      "code": "300475",
+      "name": "香农芯创",
+      "sector": "存储芯片与模组",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 9.1217457653,
+        "GrossMargin_raw": 9.1217457653,
+        "BPS_level": 10.453070115201,
+        "BPS_raw": 10.453070115201,
+        "RevGrowth_level": 200.596381199,
+        "RevGrowth_raw": 200.596381199,
+        "GrossMargin_level_z": -1.403457775910015,
+        "BPS_level_z": -0.5586575286273444,
+        "RevGrowth_level_z": 2.579864184315954
+      },
+      "composite_score": -0.3986128983648335,
+      "score_parts": {
+        "GrossMargin_level": -0.7028884966145392,
+        "BPS_level": -0.17506763628563188,
+        "RevGrowth_level": 0.47934323453533756
+      },
+      "rank": 47
+    },
+    {
+      "code": "688261",
+      "name": "东微半导",
+      "sector": "功率半导体器件",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 16.6742853377,
+        "GrossMargin_raw": 16.6742853377,
+        "BPS_level": 24.050188640789,
+        "BPS_raw": 24.050188640789,
+        "RevGrowth_level": -1.0993764386,
+        "RevGrowth_raw": -1.0993764386,
+        "GrossMargin_level_z": -1.0044546490345219,
+        "BPS_level_z": 0.7868822692933493,
+        "RevGrowth_level_z": -0.8115796335689796
+      },
+      "composite_score": -0.40726327469530643,
+      "score_parts": {
+        "GrossMargin_level": -0.5030572563678092,
+        "BPS_level": 0.24658688348609492,
+        "RevGrowth_level": -0.15079290181359215
+      },
+      "rank": 48
+    },
+    {
+      "code": "688981",
+      "name": "中芯国际",
+      "sector": "晶圆代工制造",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 21.4758595824,
+        "GrossMargin_raw": 21.4758595824,
+        "BPS_level": 18.722359595308,
+        "BPS_raw": 18.722359595308,
+        "RevGrowth_level": 8.0738981485,
+        "RevGrowth_raw": 8.0738981485,
+        "GrossMargin_level_z": -0.7507859169220293,
+        "BPS_level_z": 0.25965247397151314,
+        "RevGrowth_level_z": -0.6573342208118119
+      },
+      "composite_score": -0.41677931378313676,
+      "score_parts": {
+        "GrossMargin_level": -0.37601329621941476,
+        "BPS_level": 0.08136781936081548,
+        "RevGrowth_level": -0.12213383692453751
+      },
+      "rank": 49
+    },
+    {
+      "code": "688726",
+      "name": "拉普拉斯",
+      "sector": "光伏制程设备",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 34.1767552349,
+        "GrossMargin_raw": 34.1767552349,
+        "BPS_level": 10.386030050923,
+        "BPS_raw": 10.386030050923,
+        "RevGrowth_level": -33.3124083127,
+        "RevGrowth_raw": -33.3124083127,
+        "GrossMargin_level_z": -0.07979346055857658,
+        "BPS_level_z": -0.5652916602907152,
+        "RevGrowth_level_z": -1.3532305293753308
+      },
+      "composite_score": -0.46854182377824405,
+      "score_parts": {
+        "GrossMargin_level": -0.0399626597211468,
+        "BPS_level": -0.17714658750278933,
+        "RevGrowth_level": -0.2514325765543079
+      },
+      "rank": 50
+    },
+    {
+      "code": "600183",
+      "name": "生益科技",
+      "sector": "覆铜板与 PCB 基材",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 28.1013204296,
+        "GrossMargin_raw": 28.1013204296,
+        "BPS_level": 7.380355443425,
+        "BPS_raw": 7.380355443425,
+        "RevGrowth_level": 45.0885351399,
+        "RevGrowth_raw": 45.0885351399,
+        "GrossMargin_level_z": -0.4007606612206687,
+        "BPS_level_z": -0.8627263554709816,
+        "RevGrowth_level_z": -0.03494600964629988
+      },
+      "composite_score": -0.4775587864253928,
+      "score_parts": {
+        "GrossMargin_level": -0.2007114595841646,
+        "BPS_level": -0.27035429771209907,
+        "RevGrowth_level": -0.006493029129129146
+      },
+      "rank": 51
+    },
+    {
+      "code": "002851",
+      "name": "麦格米特",
+      "sector": "工业电源与控制",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 21.5651593069,
+        "GrossMargin_raw": 21.5651593069,
+        "BPS_level": 15.42345883853,
+        "BPS_raw": 15.42345883853,
+        "RevGrowth_level": 20.3520607461,
+        "RevGrowth_raw": 20.3520607461,
+        "GrossMargin_level_z": -0.7460681833751798,
+        "BPS_level_z": -0.06679921130888271,
+        "RevGrowth_level_z": -0.45088119907084345
+      },
+      "composite_score": -0.47835804280954974,
+      "score_parts": {
+        "GrossMargin_level": -0.37365053141302584,
+        "BPS_level": -0.02093300354928421,
+        "RevGrowth_level": -0.0837745078472397
+      },
+      "rank": 52
+    },
+    {
+      "code": "688820",
+      "name": "盛合晶微",
+      "sector": "半导体封装测试",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 29.5945057388,
+        "GrossMargin_raw": 29.5945057388,
+        "BPS_level": 9.130172715916,
+        "BPS_raw": 9.130172715916,
+        "RevGrowth_level": 13.1349997272,
+        "RevGrowth_raw": 13.1349997272,
+        "GrossMargin_level_z": -0.32187519472770415,
+        "BPS_level_z": -0.6895684341956089,
+        "RevGrowth_level_z": -0.5722335629605434
+      },
+      "composite_score": -0.4836169851501986,
+      "score_parts": {
+        "GrossMargin_level": -0.16120354712700236,
+        "BPS_level": -0.21609145074698746,
+        "RevGrowth_level": -0.10632198727620877
+      },
+      "rank": 53
+    },
+    {
+      "code": "603296",
+      "name": "华勤技术",
+      "sector": "智能硬件 ODM 代工",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 8.5399067919,
+        "GrossMargin_raw": 8.5399067919,
+        "BPS_level": 26.357489903393,
+        "BPS_raw": 26.357489903393,
+        "RevGrowth_level": 16.4239334987,
+        "RevGrowth_raw": 16.4239334987,
+        "GrossMargin_level_z": -1.4341965184878116,
+        "BPS_level_z": 1.0152075331192076,
+        "RevGrowth_level_z": -0.5169312886964104
+      },
+      "composite_score": -0.4961923629122518,
+      "score_parts": {
+        "GrossMargin_level": -0.7182832658261169,
+        "BPS_level": 0.31813763183186744,
+        "RevGrowth_level": -0.09604672891800237
+      },
+      "rank": 54
+    },
+    {
+      "code": "002384",
+      "name": "东山精密",
+      "sector": "PCB 印制电路板",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 19.3275357993,
+        "GrossMargin_raw": 19.3275357993,
+        "BPS_level": 12.359470838865,
+        "BPS_raw": 12.359470838865,
+        "RevGrowth_level": 52.7234327423,
+        "RevGrowth_raw": 52.7234327423,
+        "GrossMargin_level_z": -0.864282562491474,
+        "BPS_level_z": -0.3700044666092801,
+        "RevGrowth_level_z": 0.0934321306632658
+      },
+      "composite_score": -0.5314445898332331,
+      "score_parts": {
+        "GrossMargin_level": -0.4328553957427673,
+        "BPS_level": -0.11594904581984383,
+        "RevGrowth_level": 0.01735985172937817
+      },
+      "rank": 55
+    },
+    {
+      "code": "601689",
+      "name": "拓普集团",
+      "sector": "汽车零部件",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 19.2562423053,
+        "GrossMargin_raw": 19.2562423053,
+        "BPS_level": 14.148798233076,
+        "BPS_raw": 14.148798233076,
+        "RevGrowth_level": 14.9211723844,
+        "RevGrowth_raw": 14.9211723844,
+        "GrossMargin_level_z": -0.8680490210130334,
+        "BPS_level_z": -0.19293671391669157,
+        "RevGrowth_level_z": -0.5421996927052238
+      },
+      "composite_score": -0.5959443462988901,
+      "score_parts": {
+        "GrossMargin_level": -0.4347417370443881,
+        "BPS_level": -0.060460967099296874,
+        "RevGrowth_level": -0.10074164215520515
+      },
+      "rank": 56
+    },
+    {
+      "code": "002050",
+      "name": "三花智控",
+      "sector": "热管理部件",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 27.7966881815,
+        "GrossMargin_raw": 27.7966881815,
+        "BPS_level": 7.753748037011,
+        "BPS_raw": 7.753748037011,
+        "RevGrowth_level": 1.3573975694,
+        "RevGrowth_raw": 1.3573975694,
+        "GrossMargin_level_z": -0.4168544821631238,
+        "BPS_level_z": -0.8257762771162691,
+        "RevGrowth_level_z": -0.7702698354901193
+      },
+      "composite_score": -0.6106643145116485,
+      "score_parts": {
+        "GrossMargin_level": -0.20877166759412125,
+        "BPS_level": -0.25877517714780174,
+        "RevGrowth_level": -0.1431174697697255
+      },
+      "rank": 57
+    },
+    {
+      "code": "688141",
+      "name": "杰华特",
+      "sector": "模拟与光芯片设计",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 25.3225844471,
+        "GrossMargin_raw": 25.3225844471,
+        "BPS_level": 2.771816855229,
+        "BPS_raw": 2.771816855229,
+        "RevGrowth_level": 44.7992122815,
+        "RevGrowth_raw": 44.7992122815,
+        "GrossMargin_level_z": -0.5475621887268163,
+        "BPS_level_z": -1.3187768097640398,
+        "RevGrowth_level_z": -0.039810872601209045
+      },
+      "composite_score": -0.6948981955729727,
+      "score_parts": {
+        "GrossMargin_level": -0.2742335182742508,
+        "BPS_level": -0.413267748205186,
+        "RevGrowth_level": -0.0073969290935358405
+      },
+      "rank": 58
+    },
+    {
+      "code": "600584",
+      "name": "长电科技",
+      "sector": "半导体封装测试",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 14.5484097786,
+        "GrossMargin_raw": 14.5484097786,
+        "BPS_level": 16.075665234122,
+        "BPS_raw": 16.075665234122,
+        "RevGrowth_level": -1.757947088,
+        "RevGrowth_raw": -1.757947088,
+        "GrossMargin_level_z": -1.1167653476144885,
+        "BPS_level_z": -0.002258355827188413,
+        "RevGrowth_level_z": -0.8226532693445083
+      },
+      "composite_score": -0.7128635105493824,
+      "score_parts": {
+        "GrossMargin_level": -0.5593054025063097,
+        "BPS_level": -0.0007077055195679441,
+        "RevGrowth_level": -0.15285040252350476
+      },
+      "rank": 59
+    },
+    {
+      "code": "301018",
+      "name": "申菱环境",
+      "sector": "数据中心温控设备",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 20.5955389975,
+        "GrossMargin_raw": 20.5955389975,
+        "BPS_level": 10.372749829353,
+        "BPS_raw": 10.372749829353,
+        "RevGrowth_level": -1.8018961377,
+        "RevGrowth_raw": -1.8018961377,
+        "GrossMargin_level_z": -0.7972935403062977,
+        "BPS_level_z": -0.5666058406896001,
+        "RevGrowth_level_z": -0.823392257286807
+      },
+      "composite_score": -0.7298516575185615,
+      "score_parts": {
+        "GrossMargin_level": -0.3993055348907829,
+        "BPS_level": -0.1775584148644486,
+        "RevGrowth_level": -0.15298770776333
+      },
+      "rank": 60
+    },
+    {
+      "code": "601600",
+      "name": "中国铝业",
+      "sector": "工业金属铜铝",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 25.8276096923,
+        "GrossMargin_raw": 25.8276096923,
+        "BPS_level": 4.700980899356,
+        "BPS_raw": 4.700980899356,
+        "RevGrowth_level": 4.8488062761,
+        "RevGrowth_raw": 4.8488062761,
+        "GrossMargin_level_z": -0.5208815404423307,
+        "BPS_level_z": -1.1278711415369358,
+        "RevGrowth_level_z": -0.7115630158091487
+      },
+      "composite_score": -0.7465240441792259,
+      "score_parts": {
+        "GrossMargin_level": -0.2608711492145736,
+        "BPS_level": -0.35344325398926346,
+        "RevGrowth_level": -0.13220964097538893
+      },
+      "rank": 61
+    },
+    {
+      "code": "603186",
+      "name": "华正新材",
+      "sector": "覆铜板与 PCB 基材",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 12.0206290712,
+        "GrossMargin_raw": 12.0206290712,
+        "BPS_level": 14.935708773537,
+        "BPS_raw": 14.935708773537,
+        "RevGrowth_level": 19.83693281,
+        "RevGrowth_raw": 19.83693281,
+        "GrossMargin_level_z": -1.2503088261543358,
+        "BPS_level_z": -0.1150658438789702,
+        "RevGrowth_level_z": -0.45954289565171635
+      },
+      "composite_score": -0.7476297638391047,
+      "score_parts": {
+        "GrossMargin_level": -0.6261874822344907,
+        "BPS_level": -0.03605841552802241,
+        "RevGrowth_level": -0.08538386607659167
+      },
+      "rank": 62
+    },
+    {
+      "code": "002837",
+      "name": "英维克",
+      "sector": "数据中心温控设备",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 24.2934619169,
+        "GrossMargin_raw": 24.2934619169,
+        "BPS_level": 3.541678473906,
+        "BPS_raw": 3.541678473906,
+        "RevGrowth_level": 26.0290835683,
+        "RevGrowth_raw": 26.0290835683,
+        "GrossMargin_level_z": -0.6019310673737286,
+        "BPS_level_z": -1.242593062091902,
+        "RevGrowth_level_z": -0.3554240403291334
+      },
+      "composite_score": -0.756895175913123,
+      "score_parts": {
+        "GrossMargin_level": -0.30146287994846815,
+        "BPS_level": -0.38939389357171716,
+        "RevGrowth_level": -0.06603840239293773
+      },
+      "rank": 63
+    },
+    {
+      "code": "600460",
+      "name": "士兰微",
+      "sector": "功率半导体器件",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 19.7882272464,
+        "GrossMargin_raw": 19.7882272464,
+        "BPS_level": 7.329563577076,
+        "BPS_raw": 7.329563577076,
+        "RevGrowth_level": 17.3122896237,
+        "RevGrowth_raw": 17.3122896237,
+        "GrossMargin_level_z": -0.839944083208368,
+        "BPS_level_z": -0.8677526025728685,
+        "RevGrowth_level_z": -0.5019938902924995
+      },
+      "composite_score": -0.7858667637241679,
+      "score_parts": {
+        "GrossMargin_level": -0.42066604640370797,
+        "BPS_level": -0.27192938290190555,
+        "RevGrowth_level": -0.09327133441855427
+      },
+      "rank": 64
+    },
+    {
+      "code": "603738",
+      "name": "泰晶科技",
+      "sector": "石英晶振元件",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 20.2491716396,
+        "GrossMargin_raw": 20.2491716396,
+        "BPS_level": 4.712282700446,
+        "BPS_raw": 4.712282700446,
+        "RevGrowth_level": 24.3117772476,
+        "RevGrowth_raw": 24.3117772476,
+        "GrossMargin_level_z": -0.8155922407003675,
+        "BPS_level_z": -1.1267527411106866,
+        "RevGrowth_level_z": -0.38429994715518256
+      },
+      "composite_score": -0.8329663789060896,
+      "score_parts": {
+        "GrossMargin_level": -0.4084700044108209,
+        "BPS_level": -0.3530927785924217,
+        "RevGrowth_level": -0.07140359590284705
+      },
+      "rank": 65
+    },
+    {
+      "code": "600111",
+      "name": "北方稀土",
+      "sector": "稀土与钨金属",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 13.223781835,
+        "GrossMargin_raw": 13.223781835,
+        "BPS_level": 7.076906426757,
+        "BPS_raw": 7.076906426757,
+        "RevGrowth_level": 27.6935884581,
+        "RevGrowth_raw": 27.6935884581,
+        "GrossMargin_level_z": -1.1867458735523488,
+        "BPS_level_z": -0.8927549771821423,
+        "RevGrowth_level_z": -0.3274359711477561
+      },
+      "composite_score": -0.9349560850743877,
+      "score_parts": {
+        "GrossMargin_level": -0.594353486968176,
+        "BPS_level": -0.27976442745080526,
+        "RevGrowth_level": -0.06083817065540641
+      },
+      "rank": 66
+    },
+    {
+      "code": "601138",
+      "name": "工业富联",
+      "sector": "AI 服务器与算力硬件",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 7.3505079165,
+        "GrossMargin_raw": 7.3505079165,
+        "BPS_level": 8.88012963647,
+        "BPS_raw": 8.88012963647,
+        "RevGrowth_level": 56.5177808658,
+        "RevGrowth_raw": 56.5177808658,
+        "GrossMargin_level_z": -1.4970328486834295,
+        "BPS_level_z": -0.7143121263209733,
+        "RevGrowth_level_z": 0.15723277097950253
+      },
+      "composite_score": -0.9443846597391317,
+      "score_parts": {
+        "GrossMargin_level": -0.7497533495166179,
+        "BPS_level": -0.22384543144426813,
+        "RevGrowth_level": 0.029214121221754354
+      },
+      "rank": 67
+    },
+    {
+      "code": "000938",
+      "name": "紫光股份",
+      "sector": "网络交换设备",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 12.8829412414,
+        "GrossMargin_raw": 12.8829412414,
+        "BPS_level": 5.42895029268,
+        "BPS_raw": 5.42895029268,
+        "RevGrowth_level": 34.6087720553,
+        "RevGrowth_raw": 34.6087720553,
+        "GrossMargin_level_z": -1.2047525931873555,
+        "BPS_level_z": -1.0558329528175898,
+        "RevGrowth_level_z": -0.21115957081611494
+      },
+      "composite_score": -0.9734740404322314,
+      "score_parts": {
+        "GrossMargin_level": -0.6033717248592324,
+        "BPS_level": -0.3308685015244009,
+        "RevGrowth_level": -0.03923381404859804
+      },
+      "rank": 68
+    },
+    {
+      "code": "000977",
+      "name": "浪潮信息",
+      "sector": "AI 服务器与算力硬件",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": 6.6391551412,
+        "GrossMargin_raw": 6.6391551412,
+        "BPS_level": 15.187591059328,
+        "BPS_raw": 15.187591059328,
+        "RevGrowth_level": -24.3031219922,
+        "RevGrowth_raw": -24.3031219922,
+        "GrossMargin_level_z": -1.5346138476223155,
+        "BPS_level_z": -0.0901401480938503,
+        "RevGrowth_level_z": -1.2017425221257474
+      },
+      "composite_score": -1.0201081426932885,
+      "score_parts": {
+        "GrossMargin_level": -0.768574900331211,
+        "BPS_level": -0.028247399976871576,
+        "RevGrowth_level": -0.22328584238520602
+      },
+      "rank": 69
+    },
+    {
+      "code": "688126",
+      "name": "沪硅产业 - U",
+      "sector": "半导体基础材料",
+      "report_date": "2026-03-31",
+      "factors": {
+        "GrossMargin_level": -11.8466012468,
+        "GrossMargin_raw": -11.8466012468,
+        "BPS_level": 5.093202951478,
+        "BPS_raw": 5.093202951478,
+        "RevGrowth_level": 35.2167744683,
+        "RevGrowth_raw": 35.2167744683,
+        "GrossMargin_level_z": -2.5112223818463555,
+        "BPS_level_z": -1.0890577429658255,
+        "RevGrowth_level_z": -0.20093622229862695
+      },
+      "composite_score": -1.6363006106037636,
+      "score_parts": {
+        "GrossMargin_level": -1.257686091408239,
+        "BPS_level": -0.34128022101134575,
+        "RevGrowth_level": -0.03733429818417896
+      },
+      "rank": 70
+    }
+  ],
+  "ic_results": {
+    "ROE_level_20d": {
+      "mean_ic": -0.020631627622003643,
+      "std_ic": 0.21727444758418815,
+      "icir": -0.09495653010006816,
+      "t_stat": -0.8386333665400643,
+      "n": 78
+    },
+    "ROE_change_20d": {
+      "mean_ic": -0.00014666049841301668,
+      "std_ic": 0.22443042438408436,
+      "icir": -0.000653478684164611,
+      "t_stat": -0.005583324324987608,
+      "n": 73
+    },
+    "RevGrowth_level_20d": {
+      "mean_ic": 0.07300973570590037,
+      "std_ic": 0.25093382696741673,
+      "icir": 0.2909521469792932,
+      "t_stat": 2.775506587399728,
+      "n": 91
+    },
+    "RevGrowth_change_20d": {
+      "mean_ic": 0.07300973570590037,
+      "std_ic": 0.25093382696741673,
+      "icir": 0.2909521469792932,
+      "t_stat": 2.775506587399728,
+      "n": 91
+    },
+    "ProfitGrowth_level_20d": {
+      "mean_ic": 0.02985637541691772,
+      "std_ic": 0.2060099729718857,
+      "icir": 0.14492684497848188,
+      "t_stat": 1.3825139876265047,
+      "n": 91
+    },
+    "ProfitGrowth_change_20d": {
+      "mean_ic": 0.02985637541691772,
+      "std_ic": 0.2060099729718857,
+      "icir": 0.14492684497848188,
+      "t_stat": 1.3825139876265047,
+      "n": 91
+    },
+    "GrossMargin_level_20d": {
+      "mean_ic": -0.07460229494125978,
+      "std_ic": 0.18798003277824832,
+      "icir": -0.396862868032717,
+      "t_stat": -3.785830474031687,
+      "n": 91
+    },
+    "GrossMargin_change_20d": {
+      "mean_ic": 0.04884782606118404,
+      "std_ic": 0.23706884396642236,
+      "icir": 0.2060491173952098,
+      "t_stat": 1.9218982214995186,
+      "n": 87
+    },
+    "EPS_level_20d": {
+      "mean_ic": -0.021428940940272086,
+      "std_ic": 0.17438801497811632,
+      "icir": -0.12288081232509683,
+      "t_stat": -1.1262212478748375,
+      "n": 84
+    },
+    "EPS_change_20d": {
+      "mean_ic": -0.046488283250176246,
+      "std_ic": 0.20996166975869648,
+      "icir": -0.22141319081527608,
+      "t_stat": -1.9679634865243678,
+      "n": 79
+    },
+    "BPS_level_20d": {
+      "mean_ic": 0.09882190194971599,
+      "std_ic": 0.15839694505386345,
+      "icir": 0.62388767609193,
+      "t_stat": 6.016554862318066,
+      "n": 93
+    },
+    "BPS_change_20d": {
+      "mean_ic": -0.008411569379566575,
+      "std_ic": 0.23074480505513484,
+      "icir": -0.03645399244224237,
+      "t_stat": -0.34390627688824854,
+      "n": 89
+    },
+    "ROE_level_40d": {
+      "mean_ic": 0.0014601607874169665,
+      "std_ic": 0.1940838393596395,
+      "icir": 0.007523350693363359,
+      "t_stat": 0.06644443423730699,
+      "n": 78
+    },
+    "ROE_change_40d": {
+      "mean_ic": 0.024458357417444468,
+      "std_ic": 0.21111201886419753,
+      "icir": 0.11585487907809668,
+      "t_stat": 0.9898645207565676,
+      "n": 73
+    },
+    "RevGrowth_level_40d": {
+      "mean_ic": 0.06657603757867304,
+      "std_ic": 0.2575905980751498,
+      "icir": 0.2584567840447735,
+      "t_stat": 2.465520581724632,
+      "n": 91
+    },
+    "RevGrowth_change_40d": {
+      "mean_ic": 0.06657603757867304,
+      "std_ic": 0.2575905980751498,
+      "icir": 0.2584567840447735,
+      "t_stat": 2.465520581724632,
+      "n": 91
+    },
+    "ProfitGrowth_level_40d": {
+      "mean_ic": 0.06714391940228959,
+      "std_ic": 0.20179910123599049,
+      "icir": 0.33272655324549383,
+      "t_stat": 3.174009024932192,
+      "n": 91
+    },
+    "ProfitGrowth_change_40d": {
+      "mean_ic": 0.06714391940228959,
+      "std_ic": 0.20179910123599049,
+      "icir": 0.33272655324549383,
+      "t_stat": 3.174009024932192,
+      "n": 91
+    },
+    "GrossMargin_level_40d": {
+      "mean_ic": 0.00012429960442604613,
+      "std_ic": 0.15473163963353664,
+      "icir": 0.0008033237721802397,
+      "t_stat": 0.007663220377128662,
+      "n": 91
+    },
+    "GrossMargin_change_40d": {
+      "mean_ic": 0.048314248713400905,
+      "std_ic": 0.23536642011401024,
+      "icir": 0.20527247977854166,
+      "t_stat": 1.914654228061967,
+      "n": 87
+    },
+    "EPS_level_40d": {
+      "mean_ic": 0.011386079904079518,
+      "std_ic": 0.16490409494706126,
+      "icir": 0.06904667775372565,
+      "t_stat": 0.6328232545833425,
+      "n": 84
+    },
+    "EPS_change_40d": {
+      "mean_ic": -0.02121067764884682,
+      "std_ic": 0.1978267324496248,
+      "icir": -0.10721846024650876,
+      "t_stat": -0.9529785197961925,
+      "n": 79
+    },
+    "BPS_level_40d": {
+      "mean_ic": 0.13460092874338675,
+      "std_ic": 0.16099876182632372,
+      "icir": 0.836037042872333,
+      "t_stat": 8.062449264714074,
+      "n": 93
+    },
+    "BPS_change_40d": {
+      "mean_ic": 0.014413305540402327,
+      "std_ic": 0.19942096885474958,
+      "icir": 0.07227577733262551,
+      "t_stat": 0.6818483196607132,
+      "n": 89
+    },
+    "ROE_level_60d": {
+      "mean_ic": -0.016256910508307354,
+      "std_ic": 0.18797893760685153,
+      "icir": -0.08648261722974444,
+      "t_stat": -0.7637937944672674,
+      "n": 78
+    },
+    "ROE_change_60d": {
+      "mean_ic": 0.017547799535168076,
+      "std_ic": 0.22473669412632594,
+      "icir": 0.07808159501226954,
+      "t_stat": 0.6671294402251975,
+      "n": 73
+    },
+    "RevGrowth_level_60d": {
+      "mean_ic": 0.051410895248157194,
+      "std_ic": 0.246808959907363,
+      "icir": 0.20830238605378712,
+      "t_stat": 1.9870781180539399,
+      "n": 91
+    },
+    "RevGrowth_change_60d": {
+      "mean_ic": 0.051410895248157194,
+      "std_ic": 0.246808959907363,
+      "icir": 0.20830238605378712,
+      "t_stat": 1.9870781180539399,
+      "n": 91
+    },
+    "ProfitGrowth_level_60d": {
+      "mean_ic": 0.046251098475425904,
+      "std_ic": 0.20879852121022377,
+      "icir": 0.2215106611260867,
+      "t_stat": 2.113077031799588,
+      "n": 91
+    },
+    "ProfitGrowth_change_60d": {
+      "mean_ic": 0.046251098475425904,
+      "std_ic": 0.20879852121022377,
+      "icir": 0.2215106611260867,
+      "t_stat": 2.113077031799588,
+      "n": 91
+    },
+    "GrossMargin_level_60d": {
+      "mean_ic": -0.13023851789947158,
+      "std_ic": 0.22008713009157896,
+      "icir": -0.5917588995107479,
+      "t_stat": -5.645020120306535,
+      "n": 91
+    },
+    "GrossMargin_change_60d": {
+      "mean_ic": 0.07141928915539095,
+      "std_ic": 0.22556477208667766,
+      "icir": 0.31662430482693765,
+      "t_stat": 2.9532749085415864,
+      "n": 87
+    },
+    "EPS_level_60d": {
+      "mean_ic": -0.016524498146717425,
+      "std_ic": 0.16257175536421103,
+      "icir": -0.10164433612528471,
+      "t_stat": -0.9315857285153032,
+      "n": 84
+    },
+    "EPS_change_60d": {
+      "mean_ic": -0.0439099458322585,
+      "std_ic": 0.20955368621419157,
+      "icir": -0.2095403169733637,
+      "t_stat": -1.8624350755251902,
+      "n": 79
+    },
+    "BPS_level_60d": {
+      "mean_ic": 0.06804544763325288,
+      "std_ic": 0.1475801250431448,
+      "icir": 0.46107460346276236,
+      "t_stat": 4.446442450558194,
+      "n": 93
+    },
+    "BPS_change_60d": {
+      "mean_ic": -0.02867737146932382,
+      "std_ic": 0.20206581767094692,
+      "icir": -0.14192094338302852,
+      "t_stat": -1.3388795021191644,
+      "n": 89
+    },
+    "ROE_level_90d": {
+      "mean_ic": 0.04041187211228754,
+      "std_ic": 0.18389459622961515,
+      "icir": 0.21975562599908222,
+      "t_stat": 1.940829137854073,
+      "n": 78
+    },
+    "ROE_change_90d": {
+      "mean_ic": 0.03968768228859707,
+      "std_ic": 0.21791799542442597,
+      "icir": 0.18212209694431028,
+      "t_stat": 1.5560518783972694,
+      "n": 73
+    },
+    "RevGrowth_level_90d": {
+      "mean_ic": 0.04157896741888146,
+      "std_ic": 0.24492209289835365,
+      "icir": 0.1697640540583546,
+      "t_stat": 1.6194458615773,
+      "n": 91
+    },
+    "RevGrowth_change_90d": {
+      "mean_ic": 0.04157896741888146,
+      "std_ic": 0.24492209289835365,
+      "icir": 0.1697640540583546,
+      "t_stat": 1.6194458615773,
+      "n": 91
+    },
+    "ProfitGrowth_level_90d": {
+      "mean_ic": 0.07312216284076997,
+      "std_ic": 0.2179283925292705,
+      "icir": 0.3355329793980321,
+      "t_stat": 3.200780624160072,
+      "n": 91
+    },
+    "ProfitGrowth_change_90d": {
+      "mean_ic": 0.07312216284076997,
+      "std_ic": 0.2179283925292705,
+      "icir": 0.3355329793980321,
+      "t_stat": 3.200780624160072,
+      "n": 91
+    },
+    "GrossMargin_level_90d": {
+      "mean_ic": 0.006314504699260354,
+      "std_ic": 0.1552259584764457,
+      "icir": 0.040679437648429975,
+      "t_stat": 0.38805710264433724,
+      "n": 91
+    },
+    "GrossMargin_change_90d": {
+      "mean_ic": 0.07793686598766389,
+      "std_ic": 0.24286922850794673,
+      "icir": 0.32090053757104015,
+      "t_stat": 2.99316095226506,
+      "n": 87
+    },
+    "EPS_level_90d": {
+      "mean_ic": 0.03665380322290764,
+      "std_ic": 0.15754539154315894,
+      "icir": 0.23265550876406613,
+      "t_stat": 2.1323229595195894,
+      "n": 84
+    },
+    "EPS_change_90d": {
+      "mean_ic": -0.018562840416123112,
+      "std_ic": 0.20109516855114845,
+      "icir": -0.09230873396842283,
+      "t_stat": -0.8204579739276057,
+      "n": 79
+    },
+    "BPS_level_90d": {
+      "mean_ic": 0.07769848983073983,
+      "std_ic": 0.14251682885712558,
+      "icir": 0.5451881749953423,
+      "t_stat": 5.2576043586781935,
+      "n": 93
+    },
+    "BPS_change_90d": {
+      "mean_ic": -0.0024060637782273697,
+      "std_ic": 0.20332706552097574,
+      "icir": -0.011833465318856698,
+      "t_stat": -0.11163668854494026,
+      "n": 89
+    },
+    "ROE_level_120d": {
+      "mean_ic": 0.013336675188635178,
+      "std_ic": 0.19144485862547886,
+      "icir": 0.06966327163021675,
+      "t_stat": 0.6112927276643759,
+      "n": 77
+    },
+    "ROE_change_120d": {
+      "mean_ic": 0.02218537983512995,
+      "std_ic": 0.21185740762054753,
+      "icir": 0.10471845230385159,
+      "t_stat": 0.8885655328729619,
+      "n": 72
+    },
+    "RevGrowth_level_120d": {
+      "mean_ic": 0.04085233997266612,
+      "std_ic": 0.2289500829127753,
+      "icir": 0.1784333923488026,
+      "t_stat": 1.6927677913580337,
+      "n": 90
+    },
+    "RevGrowth_change_120d": {
+      "mean_ic": 0.04085233997266612,
+      "std_ic": 0.2289500829127753,
+      "icir": 0.1784333923488026,
+      "t_stat": 1.6927677913580337,
+      "n": 90
+    },
+    "ProfitGrowth_level_120d": {
+      "mean_ic": 0.04935362798864147,
+      "std_ic": 0.20306479535253563,
+      "icir": 0.2430437432690383,
+      "t_stat": 2.3057153993501363,
+      "n": 90
+    },
+    "ProfitGrowth_change_120d": {
+      "mean_ic": 0.04935362798864147,
+      "std_ic": 0.20306479535253563,
+      "icir": 0.2430437432690383,
+      "t_stat": 2.3057153993501363,
+      "n": 90
+    },
+    "GrossMargin_level_120d": {
+      "mean_ic": -0.04266866550359516,
+      "std_ic": 0.17513163183253339,
+      "icir": -0.24363768587730822,
+      "t_stat": -2.3113500336747985,
+      "n": 90
+    },
+    "GrossMargin_change_120d": {
+      "mean_ic": 0.07186181899899133,
+      "std_ic": 0.23999870438588147,
+      "icir": 0.29942586224735795,
+      "t_stat": 2.7767612141668474,
+      "n": 86
+    },
+    "EPS_level_120d": {
+      "mean_ic": 0.02546063519047398,
+      "std_ic": 0.1652204647751153,
+      "icir": 0.1541009778971929,
+      "t_stat": 1.4039267236135597,
+      "n": 83
+    },
+    "EPS_change_120d": {
+      "mean_ic": -0.0395536507118586,
+      "std_ic": 0.19067244501559652,
+      "icir": -0.20744293024942967,
+      "t_stat": -1.8320863533732903,
+      "n": 78
+    },
+    "BPS_level_120d": {
+      "mean_ic": 0.06789877289283615,
+      "std_ic": 0.1430075739381355,
+      "icir": 0.4747914465160347,
+      "t_stat": 4.554039572401688,
+      "n": 92
+    },
+    "BPS_change_120d": {
+      "mean_ic": -0.012723551496930814,
+      "std_ic": 0.19646353304888112,
+      "icir": -0.06476291706392723,
+      "t_stat": -0.607530013697564,
+      "n": 88
+    },
+    "ROE_level_180d": {
+      "mean_ic": 0.04900462269794209,
+      "std_ic": 0.19424565257197274,
+      "icir": 0.2522816961362092,
+      "t_stat": 2.1993408375255434,
+      "n": 76
+    },
+    "ROE_change_180d": {
+      "mean_ic": 0.023026948506020283,
+      "std_ic": 0.20796038103165054,
+      "icir": 0.11072757412632214,
+      "t_stat": 0.9330071236088778,
+      "n": 71
+    },
+    "RevGrowth_level_180d": {
+      "mean_ic": 0.04354939635837217,
+      "std_ic": 0.21509027056830182,
+      "icir": 0.20247032208062185,
+      "t_stat": 1.91010119831001,
+      "n": 89
+    },
+    "RevGrowth_change_180d": {
+      "mean_ic": 0.04354939635837217,
+      "std_ic": 0.21509027056830182,
+      "icir": 0.20247032208062185,
+      "t_stat": 1.91010119831001,
+      "n": 89
+    },
+    "ProfitGrowth_level_180d": {
+      "mean_ic": 0.04283669532846881,
+      "std_ic": 0.19210063097307864,
+      "icir": 0.22299091424885548,
+      "t_stat": 2.1036920776437547,
+      "n": 89
+    },
+    "ProfitGrowth_change_180d": {
+      "mean_ic": 0.04283669532846881,
+      "std_ic": 0.19210063097307864,
+      "icir": 0.22299091424885548,
+      "t_stat": 2.1036920776437547,
+      "n": 89
+    },
+    "GrossMargin_level_180d": {
+      "mean_ic": 0.04029266279928403,
+      "std_ic": 0.1722691452620538,
+      "icir": 0.23389367108074577,
+      "t_stat": 2.206548479883209,
+      "n": 89
+    },
+    "GrossMargin_change_180d": {
+      "mean_ic": 0.06496953030385004,
+      "std_ic": 0.23003030124841317,
+      "icir": 0.2824390089099108,
+      "t_stat": 2.603958999118665,
+      "n": 85
+    },
+    "EPS_level_180d": {
+      "mean_ic": 0.043585058111785084,
+      "std_ic": 0.16192533783339982,
+      "icir": 0.26916762191120736,
+      "t_stat": 2.4374164831225387,
+      "n": 82
+    },
+    "EPS_change_180d": {
+      "mean_ic": -0.04886215772686292,
+      "std_ic": 0.19643297639832574,
+      "icir": -0.24874722474184016,
+      "t_stat": -2.182748038572272,
+      "n": 77
+    },
+    "BPS_level_180d": {
+      "mean_ic": 0.06173499217881931,
+      "std_ic": 0.15112979570250884,
+      "icir": 0.4084898804491302,
+      "t_stat": 3.8967451034254688,
+      "n": 91
+    },
+    "BPS_change_180d": {
+      "mean_ic": -0.024339756407063973,
+      "std_ic": 0.19879999477371113,
+      "icir": -0.12243338554796888,
+      "t_stat": -1.1419825957588718,
+      "n": 87
+    },
+    "ROE_level_360d": {
+      "mean_ic": 0.07635967753063776,
+      "std_ic": 0.22932041488879548,
+      "icir": 0.3329824672071473,
+      "t_stat": 2.8837127561620837,
+      "n": 75
+    },
+    "ROE_change_360d": {
+      "mean_ic": -0.021541259155475292,
+      "std_ic": 0.196267703039516,
+      "icir": -0.10975447728727042,
+      "t_stat": -0.9182718387940126,
+      "n": 70
+    },
+    "RevGrowth_level_360d": {
+      "mean_ic": 0.07980637839836442,
+      "std_ic": 0.21922418908133154,
+      "icir": 0.36404002100678995,
+      "t_stat": 3.4149981034734,
+      "n": 88
+    },
+    "RevGrowth_change_360d": {
+      "mean_ic": 0.07980637839836442,
+      "std_ic": 0.21922418908133154,
+      "icir": 0.36404002100678995,
+      "t_stat": 3.4149981034734,
+      "n": 88
+    },
+    "ProfitGrowth_level_360d": {
+      "mean_ic": 0.004735315240323834,
+      "std_ic": 0.19933261283410214,
+      "icir": 0.023755847941775984,
+      "t_stat": 0.22284960714815008,
+      "n": 88
+    },
+    "ProfitGrowth_change_360d": {
+      "mean_ic": 0.004735315240323834,
+      "std_ic": 0.19933261283410214,
+      "icir": 0.023755847941775984,
+      "t_stat": 0.22284960714815008,
+      "n": 88
+    },
+    "GrossMargin_level_360d": {
+      "mean_ic": 0.21511709724353378,
+      "std_ic": 0.2087405181039765,
+      "icir": 1.0305478744494685,
+      "t_stat": 9.667395983140647,
+      "n": 88
+    },
+    "GrossMargin_change_360d": {
+      "mean_ic": 0.028720319289063722,
+      "std_ic": 0.20546587520706047,
+      "icir": 0.13978145645898865,
+      "t_stat": 1.281118209948979,
+      "n": 84
+    },
+    "EPS_level_360d": {
+      "mean_ic": 0.07104652551582293,
+      "std_ic": 0.22606032200218948,
+      "icir": 0.31428127185952964,
+      "t_stat": 2.828531446735767,
+      "n": 81
+    },
+    "EPS_change_360d": {
+      "mean_ic": -0.06545363694127501,
+      "std_ic": 0.20976633965565064,
+      "icir": -0.3120311726310463,
+      "t_stat": -2.720224697466451,
+      "n": 76
+    },
+    "BPS_level_360d": {
+      "mean_ic": -0.03492360248878238,
+      "std_ic": 0.16002077047983393,
+      "icir": -0.21824418407723833,
+      "t_stat": -2.070446123307379,
+      "n": 90
+    },
+    "BPS_change_360d": {
+      "mean_ic": -0.021326618239564107,
+      "std_ic": 0.24189385893141702,
+      "icir": -0.08816519085592305,
+      "t_stat": -0.8176103445803967,
+      "n": 86
+    }
+  },
+  "spread_results": {
+    "ROE_level_20d": {
+      "mean_spread": -0.005118099127022211,
+      "std_spread": 0.11065048862366741,
+      "t_stat": -0.40850996811913864,
+      "n": 78,
+      "annualized": -0.06448804900047986
+    },
+    "ROE_change_20d": {
+      "mean_spread": -0.003470363767543087,
+      "std_spread": 0.10511966960535814,
+      "t_stat": -0.2820671063638031,
+      "n": 73,
+      "annualized": -0.04372658347104289
+    },
+    "RevGrowth_level_20d": {
+      "mean_spread": 0.038712312553802156,
+      "std_spread": 0.14570969683881396,
+      "t_stat": 2.5344361647686906,
+      "n": 91,
+      "annualized": 0.48777513817790713
+    },
+    "RevGrowth_change_20d": {
+      "mean_spread": 0.038712312553802156,
+      "std_spread": 0.14570969683881396,
+      "t_stat": 2.5344361647686906,
+      "n": 91,
+      "annualized": 0.48777513817790713
+    },
+    "ProfitGrowth_level_20d": {
+      "mean_spread": 0.025013909773978653,
+      "std_spread": 0.11088531859058344,
+      "t_stat": 2.1519304284283405,
+      "n": 91,
+      "annualized": 0.315175263152131
+    },
+    "ProfitGrowth_change_20d": {
+      "mean_spread": 0.025013909773978653,
+      "std_spread": 0.11088531859058344,
+      "t_stat": 2.1519304284283405,
+      "n": 91,
+      "annualized": 0.315175263152131
+    },
+    "GrossMargin_level_20d": {
+      "mean_spread": -0.014090623565340434,
+      "std_spread": 0.06712077240095733,
+      "t_stat": -2.0025988543594195,
+      "n": 91,
+      "annualized": -0.17754185692328947
+    },
+    "GrossMargin_change_20d": {
+      "mean_spread": 0.02758326065157475,
+      "std_spread": 0.12223727651659284,
+      "t_stat": 2.104755071031572,
+      "n": 87,
+      "annualized": 0.3475490842098419
+    },
+    "EPS_level_20d": {
+      "mean_spread": -0.016782067467773477,
+      "std_spread": 0.11468682814153677,
+      "t_stat": -1.3411321201423074,
+      "n": 84,
+      "annualized": -0.2114540500939458
+    },
+    "EPS_change_20d": {
+      "mean_spread": -0.019110852551622384,
+      "std_spread": 0.10371286924713669,
+      "t_stat": -1.6378003442823563,
+      "n": 79,
+      "annualized": -0.24079674215044203
+    },
+    "BPS_level_20d": {
+      "mean_spread": 0.023362468330496468,
+      "std_spread": 0.0892868479824056,
+      "t_stat": 2.523322197894839,
+      "n": 93,
+      "annualized": 0.2943671009642555
+    },
+    "BPS_change_20d": {
+      "mean_spread": -0.012561625174146076,
+      "std_spread": 0.12394715351111794,
+      "t_stat": -0.9561021090349721,
+      "n": 89,
+      "annualized": -0.15827647719424054
+    },
+    "ROE_level_40d": {
+      "mean_spread": -0.02438072939202472,
+      "std_spread": 0.15811661401474505,
+      "t_stat": -1.3618099089633495,
+      "n": 78,
+      "annualized": -0.15359859516975571
+    },
+    "ROE_change_40d": {
+      "mean_spread": 0.002422286664892159,
+      "std_spread": 0.14399968195449905,
+      "t_stat": 0.14372272255164312,
+      "n": 73,
+      "annualized": 0.015260405988820603
+    },
+    "RevGrowth_level_40d": {
+      "mean_spread": 0.05061793611363848,
+      "std_spread": 0.21868416752878975,
+      "t_stat": 2.208044327089265,
+      "n": 91,
+      "annualized": 0.3188929975159224
+    },
+    "RevGrowth_change_40d": {
+      "mean_spread": 0.05061793611363848,
+      "std_spread": 0.21868416752878975,
+      "t_stat": 2.208044327089265,
+      "n": 91,
+      "annualized": 0.3188929975159224
+    },
+    "ProfitGrowth_level_40d": {
+      "mean_spread": 0.03467737677592415,
+      "std_spread": 0.1606726033646656,
+      "t_stat": 2.0588518774280624,
+      "n": 91,
+      "annualized": 0.21846747368832212
+    },
+    "ProfitGrowth_change_40d": {
+      "mean_spread": 0.03467737677592415,
+      "std_spread": 0.1606726033646656,
+      "t_stat": 2.0588518774280624,
+      "n": 91,
+      "annualized": 0.21846747368832212
+    },
+    "GrossMargin_level_40d": {
+      "mean_spread": -0.016056995339023317,
+      "std_spread": 0.10149864848183707,
+      "t_stat": -1.50912327799168,
+      "n": 91,
+      "annualized": -0.10115907063584689
+    },
+    "GrossMargin_change_40d": {
+      "mean_spread": 0.02582420671391149,
+      "std_spread": 0.19545927519744105,
+      "t_stat": 1.2323393940894296,
+      "n": 87,
+      "annualized": 0.1626925022976424
+    },
+    "EPS_level_40d": {
+      "mean_spread": -0.053157965038487826,
+      "std_spread": 0.17833900489774449,
+      "t_stat": -2.731880204427085,
+      "n": 84,
+      "annualized": -0.3348951797424733
+    },
+    "EPS_change_40d": {
+      "mean_spread": -0.01913579467991849,
+      "std_spread": 0.14077309596068915,
+      "t_stat": -1.2082043254376136,
+      "n": 79,
+      "annualized": -0.1205555064834865
+    },
+    "BPS_level_40d": {
+      "mean_spread": 0.04630498608624711,
+      "std_spread": 0.12783511937268816,
+      "t_stat": 3.4931646053111907,
+      "n": 93,
+      "annualized": 0.2917214123433568
+    },
+    "BPS_change_40d": {
+      "mean_spread": -0.03026458424557251,
+      "std_spread": 0.16341668780610744,
+      "t_stat": -1.7471625485460238,
+      "n": 89,
+      "annualized": -0.1906668807471068
+    },
+    "ROE_level_60d": {
+      "mean_spread": -0.011868161056574197,
+      "std_spread": 0.2090684694586594,
+      "t_stat": -0.5013513546357804,
+      "n": 78,
+      "annualized": -0.04984627643761163
+    },
+    "ROE_change_60d": {
+      "mean_spread": 0.011963950325130972,
+      "std_spread": 0.2188490960211797,
+      "t_stat": 0.4670800028199308,
+      "n": 73,
+      "annualized": 0.050248591365550085
+    },
+    "RevGrowth_level_60d": {
+      "mean_spread": 0.04862127031059473,
+      "std_spread": 0.27371465112253185,
+      "t_stat": 1.6945287941931473,
+      "n": 91,
+      "annualized": 0.2042093353044979
+    },
+    "RevGrowth_change_60d": {
+      "mean_spread": 0.04862127031059473,
+      "std_spread": 0.27371465112253185,
+      "t_stat": 1.6945287941931473,
+      "n": 91,
+      "annualized": 0.2042093353044979
+    },
+    "ProfitGrowth_level_60d": {
+      "mean_spread": 0.03881361020287457,
+      "std_spread": 0.21451361124109536,
+      "t_stat": 1.726036129214423,
+      "n": 91,
+      "annualized": 0.1630171628520732
+    },
+    "ProfitGrowth_change_60d": {
+      "mean_spread": 0.03881361020287457,
+      "std_spread": 0.21451361124109536,
+      "t_stat": 1.726036129214423,
+      "n": 91,
+      "annualized": 0.1630171628520732
+    },
+    "GrossMargin_level_60d": {
+      "mean_spread": -0.09766867535565034,
+      "std_spread": 0.1662117057862329,
+      "t_stat": -5.605500390691325,
+      "n": 91,
+      "annualized": -0.41020843649373145
+    },
+    "GrossMargin_change_60d": {
+      "mean_spread": 0.058340356543079064,
+      "std_spread": 0.21289298117021718,
+      "t_stat": 2.5560383277012173,
+      "n": 87,
+      "annualized": 0.24502949748093208
+    },
+    "EPS_level_60d": {
+      "mean_spread": -0.04475001261560613,
+      "std_spread": 0.22810938179255505,
+      "t_stat": -1.7979998766358225,
+      "n": 84,
+      "annualized": -0.18795005298554573
+    },
+    "EPS_change_60d": {
+      "mean_spread": -0.03639366489051023,
+      "std_spread": 0.194244114543337,
+      "t_stat": -1.6652961139438713,
+      "n": 79,
+      "annualized": -0.15285339254014296
+    },
+    "BPS_level_60d": {
+      "mean_spread": 0.023424087023382775,
+      "std_spread": 0.17053302933510184,
+      "t_stat": 1.3246332134564,
+      "n": 93,
+      "annualized": 0.09838116549820766
+    },
+    "BPS_change_60d": {
+      "mean_spread": -0.03362634735847337,
+      "std_spread": 0.2062662792607124,
+      "t_stat": -1.5379650404167742,
+      "n": 89,
+      "annualized": -0.14123065890558817
+    },
+    "ROE_level_90d": {
+      "mean_spread": -0.013672747251520444,
+      "std_spread": 0.20950297660185704,
+      "t_stat": -0.5763852908908957,
+      "n": 78,
+      "annualized": -0.03828369230425724
+    },
+    "ROE_change_90d": {
+      "mean_spread": 0.02622694001655517,
+      "std_spread": 0.19155239283739278,
+      "t_stat": 1.1698265441136402,
+      "n": 73,
+      "annualized": 0.07343543204635447
+    },
+    "RevGrowth_level_90d": {
+      "mean_spread": 0.04492444311996036,
+      "std_spread": 0.24802800380980927,
+      "t_stat": 1.7278366448821574,
+      "n": 91,
+      "annualized": 0.12578844073588902
+    },
+    "RevGrowth_change_90d": {
+      "mean_spread": 0.04492444311996036,
+      "std_spread": 0.24802800380980927,
+      "t_stat": 1.7278366448821574,
+      "n": 91,
+      "annualized": 0.12578844073588902
+    },
+    "ProfitGrowth_level_90d": {
+      "mean_spread": 0.04525332156026898,
+      "std_spread": 0.1977396844929289,
+      "t_stat": 2.1831185551533,
+      "n": 91,
+      "annualized": 0.12670930036875314
+    },
+    "ProfitGrowth_change_90d": {
+      "mean_spread": 0.04525332156026898,
+      "std_spread": 0.1977396844929289,
+      "t_stat": 2.1831185551533,
+      "n": 91,
+      "annualized": 0.12670930036875314
+    },
+    "GrossMargin_level_90d": {
+      "mean_spread": -0.005558946525132906,
+      "std_spread": 0.12098801585321761,
+      "t_stat": -0.4382993614291726,
+      "n": 91,
+      "annualized": -0.015565050270372137
+    },
+    "GrossMargin_change_90d": {
+      "mean_spread": 0.04628159154557678,
+      "std_spread": 0.1852814943838312,
+      "t_stat": 2.3298924102562553,
+      "n": 87,
+      "annualized": 0.12958845632761498
+    },
+    "EPS_level_90d": {
+      "mean_spread": -0.06360971908523834,
+      "std_spread": 0.21479215779950114,
+      "t_stat": -2.714217833921857,
+      "n": 84,
+      "annualized": -0.17810721343866734
+    },
+    "EPS_change_90d": {
+      "mean_spread": -0.0271511903902332,
+      "std_spread": 0.18030951517359706,
+      "t_stat": -1.338393365528171,
+      "n": 79,
+      "annualized": -0.07602333309265295
+    },
+    "BPS_level_90d": {
+      "mean_spread": 0.006139652025878193,
+      "std_spread": 0.15051136468008394,
+      "t_stat": 0.39338331731588383,
+      "n": 93,
+      "annualized": 0.017191025672458938
+    },
+    "BPS_change_90d": {
+      "mean_spread": -0.033493069802995885,
+      "std_spread": 0.1639614522451943,
+      "t_stat": -1.927117528232183,
+      "n": 89,
+      "annualized": -0.09378059544838847
+    },
+    "ROE_level_120d": {
+      "mean_spread": -0.022181942756861965,
+      "std_spread": 0.2701182852652242,
+      "t_stat": -0.7205945260000273,
+      "n": 77,
+      "annualized": -0.046582079789410126
+    },
+    "ROE_change_120d": {
+      "mean_spread": 0.02532808414342281,
+      "std_spread": 0.2751064385754221,
+      "t_stat": 0.7812100717824978,
+      "n": 72,
+      "annualized": 0.0531889767011879
+    },
+    "RevGrowth_level_120d": {
+      "mean_spread": 0.06057519888135211,
+      "std_spread": 0.30668446671657823,
+      "t_stat": 1.8738046980362595,
+      "n": 90,
+      "annualized": 0.12720791765083944
+    },
+    "RevGrowth_change_120d": {
+      "mean_spread": 0.06057519888135211,
+      "std_spread": 0.30668446671657823,
+      "t_stat": 1.8738046980362595,
+      "n": 90,
+      "annualized": 0.12720791765083944
+    },
+    "ProfitGrowth_level_120d": {
+      "mean_spread": 0.04863527088755635,
+      "std_spread": 0.257387343325976,
+      "t_stat": 1.7926083151941299,
+      "n": 90,
+      "annualized": 0.10213406886386833
+    },
+    "ProfitGrowth_change_120d": {
+      "mean_spread": 0.04863527088755635,
+      "std_spread": 0.257387343325976,
+      "t_stat": 1.7926083151941299,
+      "n": 90,
+      "annualized": 0.10213406886386833
+    },
+    "GrossMargin_level_120d": {
+      "mean_spread": -0.01933216741763826,
+      "std_spread": 0.19408561014957645,
+      "t_stat": -0.9449492072130198,
+      "n": 90,
+      "annualized": -0.04059755157704035
+    },
+    "GrossMargin_change_120d": {
+      "mean_spread": 0.07401122869295991,
+      "std_spread": 0.2784030166551778,
+      "t_stat": 2.4653177523988243,
+      "n": 86,
+      "annualized": 0.15542358025521583
+    },
+    "EPS_level_120d": {
+      "mean_spread": -0.052408567957911045,
+      "std_spread": 0.2760676786099842,
+      "t_stat": -1.729520745647154,
+      "n": 83,
+      "annualized": -0.1100579927116132
+    },
+    "EPS_change_120d": {
+      "mean_spread": -0.04158289359393358,
+      "std_spread": 0.2500739107144726,
+      "t_stat": -1.4685665182038663,
+      "n": 78,
+      "annualized": -0.08732407654726052
+    },
+    "BPS_level_120d": {
+      "mean_spread": 0.024371176993511018,
+      "std_spread": 0.2033679833284104,
+      "t_stat": 1.1494440469222644,
+      "n": 92,
+      "annualized": 0.05117947168637314
+    },
+    "BPS_change_120d": {
+      "mean_spread": -0.04952251213574941,
+      "std_spread": 0.2242634028414493,
+      "t_stat": -2.0715031382252342,
+      "n": 88,
+      "annualized": -0.10399727548507376
+    },
+    "ROE_level_180d": {
+      "mean_spread": 0.050488497479086215,
+      "std_spread": 0.30855821518254545,
+      "t_stat": 1.4264683129071591,
+      "n": 76,
+      "annualized": 0.0706838964707207
+    },
+    "ROE_change_180d": {
+      "mean_spread": 0.015061212354152309,
+      "std_spread": 0.3236087227304997,
+      "t_stat": 0.392165050406846,
+      "n": 71,
+      "annualized": 0.021085697295813232
+    },
+    "RevGrowth_level_180d": {
+      "mean_spread": 0.08077984826150403,
+      "std_spread": 0.32263758895430233,
+      "t_stat": 2.3620172925894356,
+      "n": 89,
+      "annualized": 0.11309178756610563
+    },
+    "RevGrowth_change_180d": {
+      "mean_spread": 0.08077984826150403,
+      "std_spread": 0.32263758895430233,
+      "t_stat": 2.3620172925894356,
+      "n": 89,
+      "annualized": 0.11309178756610563
+    },
+    "ProfitGrowth_level_180d": {
+      "mean_spread": 0.06947047831815277,
+      "std_spread": 0.28104401390995676,
+      "t_stat": 2.3319592279178654,
+      "n": 89,
+      "annualized": 0.09725866964541387
+    },
+    "ProfitGrowth_change_180d": {
+      "mean_spread": 0.06947047831815277,
+      "std_spread": 0.28104401390995676,
+      "t_stat": 2.3319592279178654,
+      "n": 89,
+      "annualized": 0.09725866964541387
+    },
+    "GrossMargin_level_180d": {
+      "mean_spread": 0.08914172199679277,
+      "std_spread": 0.20384094098264732,
+      "t_stat": 4.125576144531083,
+      "n": 89,
+      "annualized": 0.12479841079550986
+    },
+    "GrossMargin_change_180d": {
+      "mean_spread": 0.08489194095510168,
+      "std_spread": 0.3092786315728121,
+      "t_stat": 2.530614610266676,
+      "n": 85,
+      "annualized": 0.11884871733714233
+    },
+    "EPS_level_180d": {
+      "mean_spread": 0.017702612670533014,
+      "std_spread": 0.2910395129394991,
+      "t_stat": 0.5507979795041492,
+      "n": 82,
+      "annualized": 0.024783657738746218
+    },
+    "EPS_change_180d": {
+      "mean_spread": -0.05664915754249834,
+      "std_spread": 0.30711539472608257,
+      "t_stat": -1.6185914107449715,
+      "n": 77,
+      "annualized": -0.07930882055949767
+    },
+    "BPS_level_180d": {
+      "mean_spread": 0.03018340426360127,
+      "std_spread": 0.20689083578074313,
+      "t_stat": 1.3917065224570289,
+      "n": 91,
+      "annualized": 0.04225676596904177
+    },
+    "BPS_change_180d": {
+      "mean_spread": -0.06831683158355703,
+      "std_spread": 0.2809170992471872,
+      "t_stat": -2.268345307542708,
+      "n": 87,
+      "annualized": -0.09564356421697984
+    },
+    "ROE_level_360d": {
+      "mean_spread": 0.0940085264237375,
+      "std_spread": 0.4335447058032553,
+      "t_stat": 1.877863366004135,
+      "n": 75,
+      "annualized": 0.06580596849661624
+    },
+    "ROE_change_360d": {
+      "mean_spread": -0.009940548631760466,
+      "std_spread": 0.3903801106998986,
+      "t_stat": -0.21304516941452215,
+      "n": 70,
+      "annualized": -0.006958384042232325
+    },
+    "RevGrowth_level_360d": {
+      "mean_spread": 0.1574099231904841,
+      "std_spread": 0.38199475477407285,
+      "t_stat": 3.86559226407134,
+      "n": 88,
+      "annualized": 0.11018694623333887
+    },
+    "RevGrowth_change_360d": {
+      "mean_spread": 0.1574099231904841,
+      "std_spread": 0.38199475477407285,
+      "t_stat": 3.86559226407134,
+      "n": 88,
+      "annualized": 0.11018694623333887
+    },
+    "ProfitGrowth_level_360d": {
+      "mean_spread": 0.003702525716799684,
+      "std_spread": 0.36397562705751246,
+      "t_stat": 0.09542608725547816,
+      "n": 88,
+      "annualized": 0.002591768001759779
+    },
+    "ProfitGrowth_change_360d": {
+      "mean_spread": 0.003702525716799684,
+      "std_spread": 0.36397562705751246,
+      "t_stat": 0.09542608725547816,
+      "n": 88,
+      "annualized": 0.002591768001759779
+    },
+    "GrossMargin_level_360d": {
+      "mean_spread": 0.16155567304465035,
+      "std_spread": 0.23599844070851222,
+      "t_stat": 6.4217650986384465,
+      "n": 88,
+      "annualized": 0.11308897113125524
+    },
+    "GrossMargin_change_360d": {
+      "mean_spread": -0.0028262143007783363,
+      "std_spread": 0.3599821804189916,
+      "t_stat": -0.07195545595289773,
+      "n": 84,
+      "annualized": -0.0019783500105448352
+    },
+    "EPS_level_360d": {
+      "mean_spread": 0.0853891846578231,
+      "std_spread": 0.34238743832051866,
+      "t_stat": 2.2445410546896016,
+      "n": 81,
+      "annualized": 0.05977242926047616
+    },
+    "EPS_change_360d": {
+      "mean_spread": -0.029745520880902515,
+      "std_spread": 0.398947749129782,
+      "t_stat": -0.6499985014361065,
+      "n": 76,
+      "annualized": -0.02082186461663176
+    },
+    "BPS_level_360d": {
+      "mean_spread": -0.14767477290623565,
+      "std_spread": 0.2805836148167803,
+      "t_stat": -4.99304247295519,
+      "n": 90,
+      "annualized": -0.10337234103436495
+    },
+    "BPS_change_360d": {
+      "mean_spread": -0.018967752918369968,
+      "std_spread": 0.41504428284740824,
+      "t_stat": -0.42380948624332254,
+      "n": 86,
+      "annualized": -0.013277427042858976
+    }
+  }
+}
