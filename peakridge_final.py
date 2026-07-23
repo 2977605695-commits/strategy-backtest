@@ -7,11 +7,11 @@
 import sys,io,os,math,json
 from collections import defaultdict, Counter
 sys.stdout=io.TextIOWrapper(sys.stdout.buffer,encoding='utf-8',errors='replace')
-os.chdir(r'C:\Users\26776\Desktop\strategy-backtest')
+os.chdir(r'C:\Users\home\Desktop\strategy-backtest')
 from data_loader import load_prices,calc_ma,get_common_dates
 import csv
 
-INIT=10_000_000;RF=0.025;TD=252;MAX_POS=5
+INIT=10_000_000;RF=0.025;TD=252;MAX_POS=8
 SLIP=0.003;B_FEE=0.00025;S_FEE=0.00025;STAX=0.0005
 
 FUND_DIR='data/fundamentals_70stocks'
@@ -88,7 +88,7 @@ def backtest(factor, trail, rebal=21, max_same_sector=1):
         if di%rebal==0:
             # Rank & select
             cand=[(c,factor.get(c,{}).get(dt,float('nan'))) for c in stocks]
-            cand=[(c,s) for c,s in cand if not math.isnan(s) and c in idx and dt in idx[c]]
+            cand=[(c,s) for c,s in cand if not math.isnan(s) and s >= 0.8 and c in idx and dt in idx[c]]
             cand.sort(key=lambda x:x[1],reverse=True)
 
             # Sector filter
