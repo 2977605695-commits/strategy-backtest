@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+data_30min/
+data_oos/
+data_oos_tech/
