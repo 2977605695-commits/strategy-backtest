@@ -5,7 +5,7 @@ Loads prices (JSON), fundamentals (CSV from fundamentals_70stocks/), and compute
 import json, os, csv, math
 from collections import defaultdict
 
-DATA_DIR = r"C:\Users\home\Desktop\strategy-backtest\data"
+DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
 FUND_DIR = os.path.join(DATA_DIR, "fundamentals_70stocks")
 
 
