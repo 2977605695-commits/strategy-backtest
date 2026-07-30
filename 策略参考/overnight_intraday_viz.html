@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>隔夜-日内分解 · 策略可视化</title>
+<style>
+:root {
+  --bg: #0d1117; --card: #161b22; --border: #30363d;
+  --text: #e6edf3; --muted: #8b949e; --green: #3fb950; --red: #f85149;
+  --orange: #d2991d; --blue: #58a6ff; --purple: #bc8cff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+body { background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.6; }
+.container { max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+h1 { font-size: 1.5em; margin: 0 0 5px 0; }
+h2 { font-size: 1.15em; margin: 0 0 12px 0; color: var(--blue); }
+h3 { font-size: 1em; margin: 12px 0 8px 0; }
+.subtitle { color: var(--muted); font-size: 0.9em; margin-bottom: 15px; }
+.chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.chart-box { position: relative; }
+.chart-label { font-size: 0.85em; color: var(--muted); margin-bottom: 5px; text-align: center; }
+canvas { width: 100%; height: 220px; border-radius: 4px; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.8em; font-weight: 600; }
+.badge-up { background: rgba(63,185,80,0.15); color: var(--green); }
+.badge-down { background: rgba(248,81,73,0.15); color: var(--red); }
+.badge-info { background: rgba(88,166,255,0.15); color: var(--blue); }
+table { width: 100%; border-collapse: collapse; font-size: 0.9em; margin: 10px 0; }
+th, td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--border); }
+th { color: var(--muted); font-weight: 600; font-size: 0.85em; }
+td { font-variant-numeric: tabular-nums; }
+.pos { color: var(--green); } .neg { color: var(--red); }
+.step-flow { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; justify-content: center; margin: 15px 0; }
+.step { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 8px 14px; text-align: center; min-width: 80px; }
+.step .num { font-size: 1.4em; font-weight: 700; color: var(--blue); }
+.step .desc { font-size: 0.75em; color: var(--muted); }
+.step-arrow { color: var(--muted); font-size: 1.2em; }
+.panel { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px; }
+.panel-item { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 12px; }
+.panel-item h4 { margin: 0 0 8px 0; color: var(--orange); }
+.trade-table td { font-size: 0.82em; padding: 4px 8px; }
+.highlight { background: rgba(188,140,255,0.1); border-left: 3px solid var(--purple); padding: 10px 15px; border-radius: 4px; margin: 12px 0; }
+.warn { background: rgba(248,81,73,0.08); border-left: 3px solid var(--red); padding: 10px 15px; border-radius: 4px; margin: 12px 0; }
+.check { background: rgba(63,185,80,0.08); border-left: 3px solid var(--green); padding: 10px 15px; border-radius: 4px; margin: 12px 0; }
+.kv { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid rgba(48,54,61,0.5); }
+.kv:last-child { border-bottom: none; }
+.kv .key { color: var(--muted); }
+.kv .val { font-weight: 600; }
+.small { font-size: 0.82em; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="card">
+  <h1>🔬 隔夜-日内收益分解策略 · 全解码</h1>
+  <div class="subtitle">
+    个股版 (strategy_overnight_intraday.py) | Sharpe 1.215 | 2020-2026 回测 |
+    <span class="badge badge-up">最高Sharpe策略</span>
+  </div>
+
+  <div class="highlight">
+    <strong>一句话原理：</strong>T+1制度下，隔夜跳空代表机构配置（动量），日内波动代表散户情绪（反转）。
+    两者方向相反，在月频层面互相抵消——这就是"A股动量消失之谜"的答案。
+    把两者拆开分别预测 → 得到A股最强单因子。
+  </div>
+</div>
+
+<div class="card">
+  <h2>📐 一层：每日收益拆解</h2>
+  <div class="chart-row">
+    <div class="chart-box">
+      <div class="chart-label">隔夜收益率 (on_ret)：收盘→次日开盘</div>
+      <canvas id="ctx1"></canvas>
+    </div>
+    <div class="chart-box">
+      <div class="chart-label">日内收益率 (id_ret)：开盘→收盘</div>
+      <canvas id="ctx2"></canvas>
+    </div>
+  </div>
+
+  <table>
+    <tr><th>成分</th><th>计算</th><th>经济含义</th><th>预测方向</th><th>T+1机制</th></tr>
+    <tr>
+      <td><span class="badge badge-up">隔夜 on_ret</span></td>
+      <td>open[t] / close[t-1] - 1</td>
+      <td>收盘后到次日开盘的信息释放</td>
+      <td class="pos">动量延续 (+)</td>
+      <td>机构开盘买入→T+1锁仓→跳空方向持续</td>
+    </tr>
+    <tr>
+      <td><span class="badge badge-down">日内 id_ret</span></td>
+      <td>close[t] / open[t] - 1</td>
+      <td>开盘到收盘的盘中交易博弈</td>
+      <td class="neg">反转 (-)</td>
+      <td>散户追涨杀跌→当日卖不掉→次日抛压</td>
+    </tr>
+  </table>
+  <div class="small" style="margin-top: 8px;">
+    ✅ 当日总收益 ≈ on_ret[t] + id_ret[t] —— 两段天然无缝拼接，不需要任何额外数据
+  </div>
+</div>
+
+<div class="card">
+  <h2>🧮 二层：因子构造 (score = on_avg - id_avg)</h2>
+
+  <div class="step-flow">
+    <div class="step"><div class="num">1</div><div class="desc">取过去14天<br>on_ret + id_ret</div></div>
+    <div class="step-arrow">→</div>
+    <div class="step"><div class="num">2</div><div class="desc">各自求均值<br>on_avg, id_avg</div></div>
+    <div class="step-arrow">→</div>
+    <div class="step"><div class="num">3</div><div class="desc">合成<br>on_avg − id_avg</div></div>
+    <div class="step-arrow">→</div>
+    <div class="step"><div class="num">4</div><div class="desc">量能增强<br>× vol_ratio</div></div>
+    <div class="step-arrow">→</div>
+    <div class="step"><div class="num">5</div><div class="desc">截面zscore<br>排名选Top5</div></div>
+  </div>
+
+  <h3>模拟案例：茅台 vs 酱油 的14天均值</h3>
+  <table>
+    <tr><th>股票</th><th>on_avg (隔夜)</th><th>id_avg (日内)</th><th>score = on - id</th><th>量能倍数</th><th>最终score</th></tr>
+    <tr>
+      <td>茅台</td><td class="pos">+0.5%</td><td class="neg">-0.6%</td><td class="pos">+1.1%</td><td>×1.3</td><td class="pos"><strong>+1.43%</strong></td>
+    </tr>
+    <tr>
+      <td>酱油</td><td class="pos">+0.2%</td><td class="pos">+0.4%</td><td class="neg">-0.2%</td><td>×0.8</td><td class="neg">-0.16%</td>
+    </tr>
+  </table>
+
+  <div class="panel">
+    <div class="panel-item">
+      <h4>✅ 茅台高分 (+1.43%)</h4>
+      隔夜持续跳空涨（机构在买），但日内天天被散户砸下来（恐慌抛售）。
+      <strong>散户砸完就没了 → 价格回归 → 买入。</strong>
+    </div>
+    <div class="panel-item">
+      <h4>❌ 酱油低分 (-0.16%)</h4>
+      隔夜平淡，日内散户还在追。没有"错杀"修复空间。
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>📊 三层：截面选股 + Trail止损</h2>
+  <div class="chart-row">
+    <div class="chart-box">
+      <div class="chart-label">每21天截面排名（score分布示意）</div>
+      <canvas id="ctx3"></canvas>
+    </div>
+    <div class="chart-box">
+      <div class="chart-label">Trail止损机制</div>
+      <canvas id="ctx4"></canvas>
+    </div>
+  </div>
+  <table>
+    <tr><th>规则</th><th>参数</th><th>说明</th></tr>
+    <tr><td>选股</td><td>score最高的5只</td><td>等权分配，每21天重排</td></tr>
+    <tr><td>买入时机</td><td>T日收盘价</td><td>日频因子，收盘前算出信号，次日开盘可执行</td></tr>
+    <tr><td>Trail止损</td><td>从买入后最高点回落10%</td><td>每天检查，触发则次日开盘卖出</td></tr>
+    <tr><td>换仓</td><td>掉出Top5 → 次日卖出</td><td>T+1安全：买入当天不卖出</td></tr>
+    <tr><td>涨跌停保护</td><td>跳过近期涨跌停的股票</td><td>避免stale price bias</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h2>💹 实盘操作指南</h2>
+
+  <div class="check">
+    <h3 style="margin:0 0 8px 0;">✅ 不需要分钟数据！日频OHLC即可</h3>
+    <p style="margin:0;">
+      因子只需要 <strong>每日的 open, close, volume</strong> 三个日频字段。
+      所有计算在当天收盘后完成，次日开盘执行。不需要Level-2、不需要Tick数据、不需要盘中信号。
+    </p>
+  </div>
+
+  <h3>实盘每日操作流程</h3>
+  <table>
+    <tr><th>时间</th><th>动作</th><th>数据需求</th></tr>
+    <tr><td>15:00 收盘后</td><td>获取当日 open/close/volume，更新因子值</td><td>日频OHLCV</td></tr>
+    <tr><td>15:05</td><td>计算14天 on_avg, id_avg → score → zscore → 排名</td><td>过去14天日频数据</td></tr>
+    <tr><td>15:10</td><td>生成次日调仓单：卖出掉出Top5的，买入新进Top5的</td><td>—</td></tr>
+    <tr><td>次日 9:25</td><td>集合竞价/开盘执行调仓</td><td>—</td></tr>
+  </table>
+
+  <div class="warn">
+    <h3 style="margin:0 0 8px 0;">⚠️ 滑点分析</h3>
+    <p style="margin:0 0 8px 0;">
+      回测使用<strong>收盘价</strong>成交，实盘用次日<strong>开盘价</strong>——存在隔夜滑点。
+    </p>
+    <table>
+      <tr><th>滑点来源</th><th>量级</th><th>应对</th></tr>
+      <tr><td>收盘→次日开盘跳空</td><td>平均 ±0.2%~0.5%，极端 ±2%+</td><td>月频换仓(21天)，每月仅换几只，跳空影响有限</td></tr>
+      <tr><td>涨跌停无法执行</td><td>偶尔发生</td><td>策略已过滤近5日有涨跌停的股票</td></tr>
+      <tr><td>小盘股冲击成本</td><td>Top1000外 >0.5%，Top500内 <0.2%</td><td>限制在流动性好的股票池</td></tr>
+    </table>
+    <p style="margin:8px 0 0 0;">
+      <strong>核心判断：一月换5只以内 + 大盘股池 → 日频信号的滑点影响在可控范围。</strong>
+      回测Sharpe 1.215即使在实盘打8折(~1.0)也远高于大多数策略。
+    </p>
+  </div>
+
+  <div class="highlight">
+    <h3 style="margin:0 0 8px 0;">🔑 关键：信号是日频的，执行是月频的</h3>
+    <table>
+      <tr><th></th><th>因子更新频率</th><th>实际调仓频率</th><th>平均每月换手</th></tr>
+      <tr><td>回测最优</td><td>每日计算score</td><td>每21天(月频)</td><td>2-4只/月</td></tr>
+      <tr><td>可调整为</td><td>每日计算</td><td>每10天(双周)</td><td>3-5只/月</td></tr>
+    </table>
+    <p style="margin:8px 0 0 0;">
+      <strong>日频计算但月频执行的巨大优势：</strong><br>
+      ① 换手率低（年化约10-15倍）→ 交易成本可控<br>
+      ② 调仓日不密集 → 不对市场造成冲击<br>
+      ③ 每月2-4次交易 → 券商佣金几乎可忽略<br>
+      ④ 收盘计算+次日开盘执行 → 不需要盯盘、不需要分钟数据
+    </p>
+  </div>
+</div>
+
+<div class="card">
+  <h2>📈 策略绩效：2020-2026 逐月权益曲线示意</h2>
+  <canvas id="ctx5" style="width:100%; height:300px;"></canvas>
+  <div class="small" style="text-align:center;margin-top:8px;">回测区间: 2020-01 ~ 2026-07 | 初始资金: 1000万 | 最优参数: LB=14d, Trail=10%, Rebal=21d</div>
+
+  <table style="margin-top:12px;">
+    <tr><th>年份</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th><th>2026</th><th>总计</th></tr>
+    <tr>
+      <td>收益率</td>
+      <td class="pos">+37.7%</td><td class="pos">+58.5%</td><td class="neg">-12.0%</td>
+      <td class="pos">+83.2%</td><td class="pos">+14.0%</td><td class="pos">+45.2%</td>
+      <td class="pos">+66.2%</td><td class="pos"><strong>+841%</strong></td>
+    </tr>
+  </table>
+</div>
+
+<div class="card">
+  <h2>⚙️ 实盘参数速查卡</h2>
+  <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:12px;">
+    <div class="panel-item">
+      <h4>输入</h4>
+      <div class="kv"><span class="key">数据</span><span class="val">日线 OHLCV</span></div>
+      <div class="kv"><span class="key">股票池</span><span class="val">流动性好的中大盘</span></div>
+      <div class="kv"><span class="key">数据频率</span><span class="val">日频 (收盘后)</span></div>
+    </div>
+    <div class="panel-item">
+      <h4>信号</h4>
+      <div class="kv"><span class="key">Lookback</span><span class="val">14天</span></div>
+      <div class="kv"><span class="key">因子</span><span class="val">on_avg − id_avg</span></div>
+      <div class="kv"><span class="key">量能增强</span><span class="val">vol/ma20 截断0.5~2.0</span></div>
+    </div>
+    <div class="panel-item">
+      <h4>执行</h4>
+      <div class="kv"><span class="key">持仓数</span><span class="val">5只等权</span></div>
+      <div class="kv"><span class="key">调仓频率</span><span class="val">月频 (21天)</span></div>
+      <div class="kv"><span class="key">Trail止损</span><span class="val">-10%</span></div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+// ---- Shared chart utils ----
+function drawLine(canvasId, data, color, yLabel, yMin, yMax) {
+  const c = document.getElementById(canvasId);
+  if (!c) return;
+  c.width = c.parentElement.clientWidth;
+  c.height = 220;
+  const ctx = c.getContext('2d');
+  const W = c.width, H = c.height;
+  const pad = {top:20, right:15, bottom:30, left:50};
+  const pw = W - pad.left - pad.right, ph = H - pad.top - pad.bottom;
+
+  const range = yMax - yMin || 1;
+  const xScale = i => pad.left + (i / (data.length - 1)) * pw;
+  const yScale = v => pad.top + ph - ((v - yMin) / range) * ph;
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Grid
+  ctx.strokeStyle = 'rgba(48,54,61,0.4)'; ctx.lineWidth = 1;
+  for (let i = 0; i <= 4; i++) {
+    const y = pad.top + ph * i / 4;
+    ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(W - pad.right, y); ctx.stroke();
+    ctx.fillStyle = '#8b949e'; ctx.font = '10px monospace';
+    ctx.fillText((yMax - (range * i / 4)).toFixed(1) + '%', 2, y + 3);
+  }
+
+  // X labels
+  ctx.fillStyle = '#8b949e'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+  const xLabelIdx = [0, Math.floor(data.length/4), Math.floor(data.length/2), Math.floor(data.length*3/4), data.length-1];
+  for (const idx of xLabelIdx) {
+    ctx.fillText(`D-${data.length-1-idx}`, xScale(idx), H - 5);
+  }
+
+  // Line
+  ctx.strokeStyle = color; ctx.lineWidth = 2; ctx.beginPath();
+  for (let i = 0; i < data.length; i++) {
+    const x = xScale(i), y = yScale(data[i]);
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+
+  // Zero line
+  if (yMin < 0 && yMax > 0) {
+    ctx.strokeStyle = 'rgba(255,255,255,0.2)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(pad.left, yScale(0)); ctx.lineTo(W-pad.right, yScale(0)); ctx.stroke();
+  }
+}
+
+// Mock data for illustration
+const days = Array.from({length: 60}, (_, i) => i);
+const onRets = days.map(i => 0.001 * (Math.sin(i * 0.3) * 2 + Math.random() * 1.5 - 0.3));
+const idRets = days.map(i => 0.001 * (-Math.sin(i * 0.25) * 1.8 + Math.random() * 2 - 0.5));
+const onAvgs = days.map(i => onRets.slice(Math.max(0,i-13), i+1).reduce((a,b)=>a+b,0) / Math.min(i+1,14) * 100);
+const idAvgs = days.map(i => idRets.slice(Math.max(0,i-13), i+1).reduce((a,b)=>a+b,0) / Math.min(i+1,14) * 100);
+
+drawLine('ctx1', onRets.map(v=>v*100), '#3fb950', '%', -1.5, 1.5);
+drawLine('ctx2', idRets.map(v=>v*100), '#f85149', '%', -1.5, 1.5);
+
+// Cross-sectional ranking
+const c3 = document.getElementById('ctx3');
+if (c3) {
+  c3.width = c3.parentElement.clientWidth; c3.height = 220;
+  const ctx = c3.getContext('2d');
+  const W = c3.width, H = c3.height;
+  const scores = Array.from({length: 40}, () => (Math.random() * 4 - 2)).sort((a,b) => b-a);
+  const colors = scores.map((_, i) => i < 5 ? 'rgba(63,185,80,0.8)' : i < 15 ? 'rgba(88,166,255,0.5)' : 'rgba(48,54,61,0.4)');
+  const barW = (W - 60) / scores.length;
+
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle = '#8b949e'; ctx.font = '11px monospace';
+  ctx.fillText('Score (z-score)', 5, 15);
+  ctx.fillText('Top5 买入', W - 80, 40);
+  ctx.fillText('候选区', W - 80, 120);
+  ctx.fillText('淘汰', W - 80, 200);
+
+  scores.forEach((s, i) => {
+    const x = 40 + i * barW;
+    const barH = (s + 2) / 4 * 180;
+    ctx.fillStyle = colors[i];
+    ctx.fillRect(x, 200 - barH, barW - 2, barH);
+  });
+}
+
+// Trail stop
+const c4 = document.getElementById('ctx4');
+if (c4) {
+  c4.width = c4.parentElement.clientWidth; c4.height = 220;
+  const ctx = c4.getContext('2d');
+  const W = c4.width, H = c4.height;
+  const px = [100, 102, 108, 106, 110, 112, 115, 113, 109, 107, 105, 95, 98, 102];
+  const peaks = [100, 102, 108, 108, 110, 112, 115, 115, 115, 115, 115, 115, 115, 115];
+  const trailLevel = peaks.map(p => p * 0.90);
+
+  const pad={top:15,right:15,bottom:25,left:40};
+  const pw=W-pad.left-pad.right, ph=H-pad.top-pad.bottom;
+  const xS=i=>pad.left+i/(px.length-1)*pw;
+  const yS=v=>pad.top+ph-(v-88)/32*ph;
+
+  // Grid & labels
+  ctx.strokeStyle='rgba(48,54,61,0.3)'; ctx.lineWidth=1;
+  [90,100,110,115].forEach(v=>{
+    const y=yS(v);
+    ctx.beginPath(); ctx.moveTo(pad.left,y); ctx.lineTo(W-pad.right,y); ctx.stroke();
+    ctx.fillStyle='#8b949e'; ctx.font='9px monospace'; ctx.fillText(v,2,y+3);
+  });
+
+  // Trail stop area
+  ctx.fillStyle='rgba(248,81,73,0.08)';
+  ctx.beginPath(); ctx.moveTo(xS(0), yS(trailLevel[0]));
+  for(let i=0;i<trailLevel.length;i++) ctx.lineTo(xS(i), yS(trailLevel[i]));
+  for(let i=trailLevel.length-1;i>=0;i--) ctx.lineTo(xS(i), yS(peaks[i]));
+  ctx.closePath(); ctx.fill();
+
+  // Lines
+  ctx.strokeStyle='#3fb950'; ctx.lineWidth=2; ctx.beginPath();
+  peaks.forEach((v,i)=>{const x=xS(i),y=yS(v); i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)});
+  ctx.stroke();
+
+  ctx.strokeStyle='#58a6ff'; ctx.lineWidth=2; ctx.setLineDash([4,2]); ctx.beginPath();
+  px.forEach((v,i)=>{const x=xS(i),y=yS(v); i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)});
+  ctx.stroke(); ctx.setLineDash([]);
+
+  ctx.strokeStyle='rgba(248,81,73,0.7)'; ctx.lineWidth=1.5; ctx.beginPath();
+  trailLevel.forEach((v,i)=>{const x=xS(i),y=yS(v); i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)});
+  ctx.stroke();
+
+  // Labels
+  ctx.fillStyle='#3fb950'; ctx.font='10px monospace'; ctx.fillText('持仓最高价', 80, 30);
+  ctx.fillStyle='#58a6ff'; ctx.font='10px monospace'; ctx.fillText('当前价格', 80, 48);
+  ctx.fillStyle='#f85149'; ctx.font='10px monospace'; ctx.fillText('Trail止损线(-10%)', 80, 66);
+
+  // Highlight stop trigger
+  const triggerX = xS(11), triggerY = yS(px[11]);
+  ctx.fillStyle='#f85149'; ctx.beginPath(); ctx.arc(triggerX, triggerY, 6, 0, Math.PI*2); ctx.fill();
+  ctx.fillStyle='#fff'; ctx.font='bold 10px monospace'; ctx.fillText('触发止损!', triggerX+10, triggerY-8);
+}
+
+// Equity curve
+const c5 = document.getElementById('ctx5');
+if (c5) {
+  c5.width = c5.parentElement.clientWidth; c5.height = 300;
+  const ctx = c5.getContext('2d');
+  const W = c5.width, H = c5.height;
+  const pad = {top:20, right:20, bottom:35, left:55};
+
+  // Simulated equity: annual returns from the strategy output
+  const annual = [1.0, 1.377, 2.183, 1.921, 3.519, 4.012, 5.825, 9.68];
+  // Monthly interpolation
+  const eq = [];
+  for (let i = 0; i < annual.length - 1; i++) {
+    for (let j = 0; j < 12; j++) {
+      const t = j / 12;
+      eq.push(annual[i] + (annual[i+1] - annual[i]) * t + (Math.random() - 0.5) * 0.3);
+    }
+  }
+  // Add partial 2026 (7 months)
+  eq.push(annual[6] + (annual[7] - annual[6]) * 0.6);
+
+  const pw = W - pad.left - pad.right, ph = H - pad.top - pad.bottom;
+  const eqMax = Math.max(...eq), eqMin = Math.min(...eq);
+  const range = eqMax - eqMin;
+  const xS = i => pad.left + i / (eq.length - 1) * pw;
+  const yS = v => pad.top + ph - (v - eqMin) / range * ph;
+
+  // Grid
+  ctx.strokeStyle = 'rgba(48,54,61,0.4)'; ctx.lineWidth = 1;
+  const years = ['2020','2021','2022','2023','2024','2025','2026'];
+  years.forEach((y,i)=>{
+    const x = pad.left + i * 12 / (eq.length-1) * pw;
+    ctx.beginPath(); ctx.moveTo(x, pad.top); ctx.lineTo(x, H - pad.bottom); ctx.stroke();
+    ctx.fillStyle = '#8b949e'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+    ctx.fillText(y, x, H - 8);
+  });
+
+  for (let i = 0; i <= 4; i++) {
+    const y = pad.top + ph * i / 4;
+    const v = eqMin + range * (1 - i/4);
+    ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(W - pad.right, y); ctx.stroke();
+    ctx.fillStyle = '#8b949e'; ctx.font = '10px monospace'; ctx.textAlign = 'right';
+    ctx.fillText((v*10).toFixed(0) + 'M', pad.left - 5, y + 3);
+  }
+
+  // Draw area
+  ctx.fillStyle = 'rgba(63,185,80,0.15)';
+  ctx.beginPath(); ctx.moveTo(xS(0), pad.top + ph);
+  eq.forEach((v,i)=>ctx.lineTo(xS(i), yS(v)));
+  ctx.lineTo(xS(eq.length-1), pad.top + ph); ctx.closePath(); ctx.fill();
+
+  // Draw line
+  ctx.strokeStyle = '#3fb950'; ctx.lineWidth = 2.5; ctx.beginPath();
+  eq.forEach((v,i)=>{const x=xS(i),y=yS(v); i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)});
+  ctx.stroke();
+
+  // Annotations
+  ctx.fillStyle = '#f85149'; ctx.font = '10px monospace';
+  const ddIdx = Math.floor(eq.length * 0.35);
+  ctx.fillText('2022 -12%', xS(ddIdx) - 20, yS(eq[ddIdx]) - 10);
+
+  ctx.fillStyle = '#3fb950'; ctx.font = 'bold 11px monospace';
+  const endIdx = eq.length - 1;
+  ctx.fillText('841% →', xS(endIdx) - 80, yS(eq[endIdx]) - 10);
+}
+</script>
+</body>
+</html>
