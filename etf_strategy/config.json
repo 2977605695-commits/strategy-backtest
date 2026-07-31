@@ -1,0 +1,113 @@
+{
+  "mode": "paper",
+  "platform": "qmt",
+  "account": {
+    "initial_capital": 10000000,
+    "max_position_ratio": 1.0
+  },
+  "strategy": {
+    "fast_ma": 6,
+    "slow_ma": 15,
+    "slope_ma": 8,
+    "trail_bull": 0.03,
+    "trail_bear": 0.06,
+    "bull_min_hold": 0,
+    "bear_min_hold": 7,
+    "pullback_min": 0.05,
+    "need_n_index": 7,
+    "pnl_loss_threshold": -1000000,
+    "risk_free": 0.025
+  },
+  "pool": {
+    "full": [
+      "159782",
+      "588380",
+      "588870",
+      "588080",
+      "588300",
+      "518800",
+      "589720",
+      "588890",
+      "588170",
+      "588200",
+      "159995",
+      "512480",
+      "515880",
+      "515050",
+      "159819",
+      "159992",
+      "512010",
+      "518880",
+      "159937",
+      "513180",
+      "513050",
+      "513100",
+      "159509",
+      "588000",
+      "588220",
+      "510300",
+      "159915",
+      "510050",
+      "511010",
+      "511260",
+      "510880",
+      "512890",
+      "159201"
+    ],
+    "defensive": [
+      "518880",
+      "159937",
+      "518800",
+      "511010",
+      "511260",
+      "510880",
+      "512890",
+      "159201",
+      "510050"
+    ],
+    "index_codes": {
+      "510300": "HS300",
+      "159915": "创业板",
+      "588000": "科创50",
+      "510050": "上证50",
+      "515880": "通信ETF",
+      "512480": "半导体ETF",
+      "513100": "纳指ETF",
+      "511260": "十年国债",
+      "512890": "红利低波",
+      "159992": "创新药ETF"
+    }
+  },
+  "risk": {
+    "stop_loss_ratio": 0.08,
+    "take_profit_ratio": 0.3,
+    "max_positions": 1,
+    "max_order_amount": 20000000,
+    "max_daily_trades": 20,
+    "max_cancel_reissue": 3,
+    "max_slippage": 0.005,
+    "circuit_breaker_loss": 0.15,
+    "position_sync_interval": 300
+  },
+  "execution": {
+    "slippage": 0.003,
+    "buy_fee": 0.00025,
+    "sell_fee": 0.00025,
+    "stamp_tax": 0.0005,
+    "min_order_amount": 10000,
+    "order_timeout": 60,
+    "cancel_wait": 5
+  },
+  "logging": {
+    "level": "INFO",
+    "log_dir": "logs",
+    "max_days": 90,
+    "console": true
+  },
+  "data": {
+    "source": "local",
+    "data_dir": "../data",
+    "start_date": "2020-01-01",
+    "end_date": "2026-07-31"
+  }
+}

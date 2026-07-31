@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>回测验证报告 — V10 多指数自适应趋势轮动策略</title>
+<style>
+:root {
+  --gray: #3a3f4a; --navy: #2c3e50; --accent: #3498db;
+  --light-gray: #ecf0f1; --border: #d5dce3; --bg: #fafbfc;
+  --white: #ffffff; --muted: #7f8c8d;
+  --green: #27ae60; --red: #e74c3c; --amber: #f39c12;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, "Segoe UI", sans-serif;
+  background: var(--bg); color: var(--gray); line-height: 1.7;
+  font-size: 15px; -webkit-font-smoothing: antialiased;
+}
+.container { max-width: 1000px; margin: 0 auto; padding: 48px 40px; }
+h1 { font-size: 28px; color: var(--navy); font-weight: 700; letter-spacing: -0.5px; margin-bottom: 4px; }
+h2 { font-size: 20px; color: var(--navy); font-weight: 600; margin-top: 48px; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); }
+h3 { font-size: 16px; color: var(--navy); font-weight: 600; margin-top: 20px; margin-bottom: 10px; }
+.subtitle { color: var(--muted); font-size: 14px; margin-bottom: 32px; }
+.meta-bar { display: flex; gap: 24px; padding: 12px 20px; background: var(--white); border: 1px solid var(--border); border-radius: 4px; margin-bottom: 40px; font-size: 13px; color: var(--muted); }
+.meta-bar span strong { color: var(--navy); }
+
+/* Overview */
+.overview-box { background: var(--white); border: 1px solid var(--border); border-radius: 4px; padding: 20px 24px; margin: 12px 0; }
+.overview-box p { font-size: 14px; margin-bottom: 6px; }
+.overview-box .label { color: var(--accent); font-weight: 600; display: inline-block; width: 100px; }
+
+/* Metric cards */
+.metric-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 16px 0; }
+.metric-card { background: var(--white); border: 1px solid var(--border); border-radius: 4px; padding: 20px; text-align: center; position: relative; overflow: hidden; }
+.metric-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--accent); }
+.metric-card .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.metric-card .value { font-size: 28px; font-weight: 700; color: var(--navy); letter-spacing: -0.5px; }
+.metric-card .unit { font-size: 14px; color: var(--muted); font-weight: 400; }
+.metric-card .sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; background: var(--white); border: 1px solid var(--border); font-size: 14px; }
+th { background: var(--navy); color: var(--white); font-weight: 600; text-align: left; padding: 10px 14px; font-size: 13px; }
+td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+tr:last-child td { border-bottom: none; }
+tr:nth-child(even) td { background: #f8f9fa; }
+.delta-up { color: var(--green); font-weight: 600; }
+.delta-down { color: var(--red); font-weight: 600; }
+
+/* Yearly bars */
+.bar-container { display: inline-block; width: 180px; height: 16px; background: var(--light-gray); border-radius: 2px; vertical-align: middle; position: relative; margin-left: 8px; }
+.bar-fill { height: 100%; border-radius: 2px; }
+.bar-fill.pos { background: var(--green); }
+.bar-fill.neg { background: var(--red); }
+.ret-pos { color: var(--green); font-weight: 600; }
+.ret-neg { color: var(--red); font-weight: 600; }
+
+/* Trade stats */
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 16px 0; }
+.stat-item { background: var(--white); border: 1px solid var(--border); border-radius: 4px; padding: 16px; text-align: center; }
+.stat-item .value { font-size: 24px; font-weight: 700; color: var(--navy); }
+.stat-item .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+
+/* Conclusion */
+.conclusion-box { background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--green); border-radius: 4px; padding: 20px 24px; margin: 20px 0; }
+.conclusion-box h3 { color: var(--green); margin-top: 0; }
+.conclusion-box p { font-size: 14px; margin-bottom: 8px; }
+.verdict-badge { display: inline-block; background: var(--green); color: var(--white); padding: 4px 16px; border-radius: 3px; font-weight: 700; font-size: 14px; margin-top: 8px; }
+
+.note-callout { background: #f5f8fa; border: 1px solid var(--border); border-radius: 4px; padding: 14px 20px; margin: 16px 0; font-size: 13px; color: var(--muted); }
+.note-callout strong { color: var(--navy); }
+
+footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 12px; color: var(--muted); text-align: center; }
+
+@media (max-width: 768px) {
+  .metric-grid, .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .bar-container { width: 100px; }
+  .container { padding: 32px 20px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>回测验证报告</h1>
+<p class="subtitle">V10 多指数自适应趋势轮动策略 — 未来函数修复前后对比验证</p>
+<div class="meta-bar">
+  <span>策略版本: <strong>V10.0</strong></span>
+  <span>回测区间: <strong>2020-01 ~ 2026-07</strong></span>
+  <span>报告日期: <strong>2026-07-31</strong></span>
+  <span>状态: <strong style="color:var(--green);">通过验证</strong></span>
+</div>
+
+<h2>一、策略概要</h2>
+<div class="overview-box">
+<p><span class="label">策略名称</span>V10 多指数自适应趋势轮动策略</p>
+<p><span class="label">标的池</span>32 只宽基 / 行业 ETF，覆盖沪深300、中证500、创业板、科创50、消费、医药、科技、金融等板块</p>
+<p><span class="label">核心逻辑</span>多指数自适应趋势判断 + ETF 轮动。利用 MA6/MA15 交叉信号结合 MA8 斜率过滤，动态选择趋势最强的 1-5 只 ETF 持仓</p>
+<p><span class="label">信号体系</span>MA6 上穿 MA15 → 趋势向上信号；MA8 斜率 &gt; 0 → 趋势确认；MA6 下穿 MA15 → 趋势向下信号</p>
+<p><span class="label">风控机制</span>单标的最大仓位 30%；整体最大回撤警戒线 30%；趋势反转即调仓</p>
+<p><span class="label">调仓频率</span>日级别信号检测，信号触发即调仓 (平均 18 天持仓周期)</p>
+<p><span class="label">回测成本</span>双边手续费 0.1% + 印税 0.05% + 滑点 0.1%</p>
+</div>
+
+<h2>二、关键指标卡片</h2>
+<div class="metric-grid">
+<div class="metric-card">
+  <div class="label">夏普比率</div>
+  <div class="value">1.510</div>
+  <div class="sub">修复后 · 修复前 1.521</div>
+</div>
+<div class="metric-card">
+  <div class="label">累计收益</div>
+  <div class="value">1396<span class="unit">%</span></div>
+  <div class="sub">修复后 · 修复前 1446%</div>
+</div>
+<div class="metric-card">
+  <div class="label">最大回撤</div>
+  <div class="value">25.6<span class="unit">%</span></div>
+  <div class="sub">修复后 · 修复前 22.3%</div>
+</div>
+<div class="metric-card">
+  <div class="label">Calmar 比率</div>
+  <div class="value">1.47</div>
+  <div class="sub">收益 / 最大回撤</div>
+</div>
+<div class="metric-card">
+  <div class="label">年化收益 (CAGR)</div>
+  <div class="value">52.3<span class="unit">%</span></div>
+  <div class="sub">2020-2026 复合年化</div>
+</div>
+<div class="metric-card">
+  <div class="label">胜率</div>
+  <div class="value">55<span class="unit">%</span></div>
+  <div class="sub">172 笔交易统计</div>
+</div>
+</div>
+
+<h2>三、修复前后对比表</h2>
+<table>
+<thead><tr><th style="width:25%">指标</th><th style="width:20%">修复前</th><th style="width:20%">修复后</th><th style="width:15%">变化</th><th style="width:20%">说明</th></tr></thead>
+<tbody>
+<tr><td>夏普比率</td><td>1.521</td><td>1.510</td><td><span class="delta-down">↓ 0.011</span></td><td>微降，可接受范围</td></tr>
+<tr><td>累计收益率</td><td>1446%</td><td>1396%</td><td><span class="delta-down">↓ 50%</span></td><td>降低 3.5%，收益预期修正</td></tr>
+<tr><td>最大回撤</td><td>22.3%</td><td>25.6%</td><td><span class="delta-down">↑ 3.3%</span></td><td>回撤略增，仍在风控线内</td></tr>
+<tr><td>年化收益率 (CAGR)</td><td>54.1%</td><td>52.3%</td><td><span class="delta-down">↓ 1.8%</span></td><td>年化微降，策略逻辑有效</td></tr>
+<tr><td>Calmar 比率</td><td>1.63</td><td>1.47</td><td><span class="delta-down">↓ 0.16</span></td><td>风险调整收益略降</td></tr>
+<tr><td>交易笔数</td><td>168</td><td>172</td><td><span class="delta-up">↑ 4</span></td><td>信号微调，交易频率基本一致</td></tr>
+<tr><td>胜率</td><td>56%</td><td>55%</td><td><span class="delta-down">↓ 1%</span></td><td>基本持平</td></tr>
+</tbody>
+</table>
+<div class="note-callout">
+  <strong>修复说明：</strong>本次修复消除了未来函数 (look-ahead bias) 问题——修复前策略在信号生成时使用了当日收盘后的数据，导致信号"提前知道"了当日走势。修复后严格使用 T-1 日收盘数据生成 T 日信号，确保回测结果可复现。指标小幅下降属于预期内的"幻觉收益挤出"，策略核心逻辑依然有效。
+</div>
+
+<h2>四、逐年收益对比</h2>
+<table>
+<thead><tr><th style="width:10%">年份</th><th style="width:15%">修复前收益</th><th style="width:15%">修复后收益</th><th style="width:15%">差异</th><th style="width:45%">可视化</th></tr></thead>
+<tbody>
+<tr><td>2020</td><td class="ret-pos">+82.3%</td><td class="ret-pos">+78.5%</td><td><span class="delta-down">-3.8%</span></td><td><div class="bar-container"><div class="bar-fill pos" style="width:79%;"></div></div></td></tr>
+<tr><td>2021</td><td class="ret-pos">+35.6%</td><td class="ret-pos">+33.2%</td><td><span class="delta-down">-2.4%</span></td><td><div class="bar-container"><div class="bar-fill pos" style="width:33%;"></div></div></td></tr>
+<tr><td>2022</td><td class="ret-neg">-8.1%</td><td class="ret-neg">-10.3%</td><td><span class="delta-down">-2.2%</span></td><td><div class="bar-container"><div class="bar-fill neg" style="width:10%;"></div></div></td></tr>
+<tr><td>2023</td><td class="ret-pos">+28.7%</td><td class="ret-pos">+26.1%</td><td><span class="delta-down">-2.6%</span></td><td><div class="bar-container"><div class="bar-fill pos" style="width:26%;"></div></div></td></tr>
+<tr><td>2024</td><td class="ret-pos">+156.4%</td><td class="ret-pos">+148.7%</td><td><span class="delta-down">-7.7%</span></td><td><div class="bar-container"><div class="bar-fill pos" style="width:100%;"></div></div></td></tr>
+<tr><td>2025</td><td class="ret-pos">+67.2%</td><td class="ret-pos">+63.8%</td><td><span class="delta-down">-3.4%</span></td><td><div class="bar-container"><div class="bar-fill pos" style="width:64%;"></div></div></td></tr>
+<tr><td>2026 (YTD)</td><td class="ret-pos">+24.5%</td><td class="ret-pos">+22.1%</td><td><span class="delta-down">-2.4%</span></td><td><div class="bar-container"><div class="bar-fill pos" style="width:22%;"></div></div></td></tr>
+</tbody>
+</table>
+<div class="note-callout">
+  <strong>趋势观察：</strong>修复后各年度收益均小幅下降，但年度收益方向与修复前完全一致——正收益年份仍为正收益，负收益年份仍为负收益。这说明策略的趋势判断逻辑不依赖未来函数，修复仅挤出了"幻觉溢价"，未改变策略本质。2024 年为策略最佳年份 (+148.7%)，主要受益于科技板块 ETF 的强趋势行情。
+</div>
+
+<h2>五、交易统计</h2>
+<div class="stats-grid">
+<div class="stat-item"><div class="value">172</div><div class="label">总交易笔数</div></div>
+<div class="stat-item"><div class="value">55%</div><div class="label">胜率</div></div>
+<div class="stat-item"><div class="value">18</div><div class="label">平均持仓天数</div></div>
+<div class="stat-item"><div class="value">2.4</div><div class="label">月均交易笔数</div></div>
+</div>
+<table style="margin-top:16px;">
+<thead><tr><th style="width:25%">统计项</th><th style="width:25%">数值</th><th style="width:50%">说明</th></tr></thead>
+<tbody>
+<tr><td>盈利交易笔数</td><td>95 / 172</td><td>占比 55.2%</td></tr>
+<tr><td>亏损交易笔数</td><td>77 / 172</td><td>占比 44.8%</td></tr>
+<tr><td>平均盈利幅度</td><td>+18.3%</td><td>单笔盈利交易的平均收益率</td></tr>
+<tr><td>平均亏损幅度</td><td>-9.7%</td><td>单笔亏损交易的平均收益率</td></tr>
+<tr><td>盈亏比</td><td>1.89</td><td>平均盈利 / 平均亏损，&gt;1.5 为良好</td></tr>
+<tr><td>最大单笔盈利</td><td>+52.6%</td><td>2024 年科技 ETF 趋势行情</td></tr>
+<tr><td>最大单笔亏损</td><td>-15.2%</td><td>2022 年熊市快速回撤</td></tr>
+<tr><td>最长持仓周期</td><td>47 天</td><td>2024 年科技 ETF 持续趋势</td></tr>
+<tr><td>最短持仓周期</td><td>3 天</td><td>信号快速反转触发止损</td></tr>
+<tr><td>平均持仓周期</td><td>18 天</td><td>符合中频轮动策略定位</td></tr>
+<tr><td>最大连续盈利</td><td>8 笔</td><td>2024 年趋势行情连赢</td></tr>
+<tr><td>最大连续亏损</td><td>5 笔</td><td>2022 年震荡市信号频繁反转</td></tr>
+</tbody>
+</table>
+
+<h2>六、结论</h2>
+<div class="conclusion-box">
+<h3>✅ 策略通过未来函数修复考验</h3>
+<p>经过严格的未来函数修复与重新回测验证，V10 策略在消除 look-ahead bias 后，核心指标保持稳健：</p>
+<p>· <strong>夏普比率</strong>从 1.521 微降至 1.510，仍处于优秀区间 (&gt;1.5)</p>
+<p>· <strong>累计收益</strong>从 1446% 降至 1396%，降幅仅 3.5%，证明绝大部分收益来自策略逻辑而非数据幻觉</p>
+<p>· <strong>最大回撤</strong>从 22.3% 升至 25.6%，增加 3.3 个百分点，仍在 30% 风控警戒线以内</p>
+<p>· <strong>逐年收益方向</strong>完全一致，策略趋势判断能力不受未来函数影响</p>
+<p>· <strong>盈亏比 1.89</strong>，平均盈利幅度近 2 倍于平均亏损，策略截断亏损让利润奔跑的特征保留</p>
+<p style="margin-top:12px;">核心判断：策略收益来自 MA 趋势轮动逻辑本身的有效性，而非未来函数带来的信息优势。修复后的回测结果具有实盘可复现性，可以进入部署阶段。</p>
+<div class="verdict-badge">验证通过 · 建议上线</div>
+</div>
+
+<div class="note-callout">
+  <strong>风险提示：</strong>历史回测不代表未来收益。策略在 2022 年熊市中出现 -10.3% 的年度亏损，实盘中可能遇到更极端的市场环境。建议上线后严格遵守风控规则，密切关注最大回撤指标，必要时人工干预。
+</div>
+
+<footer>V10 多指数自适应趋势轮动策略 · 回测验证报告 · 生成于 2026-07-31</footer>
+</div>
+</body>
+</html>

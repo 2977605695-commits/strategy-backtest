@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>API 差异对照表 — QMT vs PTrade</title>
+<style>
+:root {
+  --gray: #3a3f4a; --navy: #2c3e50; --accent: #3498db;
+  --light-gray: #ecf0f1; --border: #d5dce3; --bg: #fafbfc;
+  --white: #ffffff; --muted: #7f8c8d;
+  --qmt: #2c3e50; --ptrade: #16a085;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, "Segoe UI", sans-serif;
+  background: var(--bg); color: var(--gray); line-height: 1.7;
+  font-size: 15px; -webkit-font-smoothing: antialiased;
+}
+.container { max-width: 1000px; margin: 0 auto; padding: 48px 40px; }
+h1 { font-size: 28px; color: var(--navy); font-weight: 700; letter-spacing: -0.5px; margin-bottom: 4px; }
+h2 { font-size: 20px; color: var(--navy); font-weight: 600; margin-top: 48px; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); }
+.subtitle { color: var(--muted); font-size: 14px; margin-bottom: 32px; }
+.meta-bar { display: flex; gap: 24px; padding: 12px 20px; background: var(--white); border: 1px solid var(--border); border-radius: 4px; margin-bottom: 40px; font-size: 13px; color: var(--muted); }
+.meta-bar span strong { color: var(--navy); }
+
+table { width: 100%; border-collapse: collapse; margin: 12px 0 24px; background: var(--white); border: 1px solid var(--border); font-size: 14px; }
+th { background: var(--navy); color: var(--white); font-weight: 600; text-align: left; padding: 10px 14px; font-size: 13px; }
+td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+tr:nth-child(even) td { background: #f8f9fa; }
+code { background: var(--light-gray); padding: 2px 6px; border-radius: 3px; font-size: 13px; color: var(--navy); font-family: "SF Mono", "Cascadia Code", Consolas, monospace; }
+
+.section-note { background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: 4px; padding: 14px 20px; margin: 16px 0; font-size: 14px; }
+
+.notice-list { list-style: none; margin: 12px 0; counter-reset: notice; }
+.notice-list li { counter-increment: notice; padding: 12px 0 12px 40px; position: relative; border-bottom: 1px solid var(--border); font-size: 14px; }
+.notice-list li:last-child { border-bottom: none; }
+.notice-list li::before { content: counter(notice); position: absolute; left: 0; top: 12px; width: 26px; height: 26px; background: var(--accent); color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+.notice-list .platform { display: inline-block; padding: 1px 8px; border-radius: 3px; font-size: 11px; font-weight: 600; margin-right: 4px; }
+.notice-list .platform.qmt { background: #e8edf2; color: var(--qmt); }
+.notice-list .platform.ptrade { background: #e8f7f4; color: var(--ptrade); }
+.notice-list .platform.both { background: #fef9e7; color: #b7950b; }
+
+.migration-steps { counter-reset: mstep; margin: 16px 0; }
+.migration-step { display: flex; gap: 16px; margin-bottom: 16px; }
+.migration-num { counter-increment: mstep; flex-shrink: 0; width: 32px; height: 32px; background: var(--accent); color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; }
+.migration-num::before { content: counter(mstep); }
+.migration-body h3 { margin-top: 4px; font-size: 15px; }
+.migration-body p { font-size: 14px; }
+
+footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 12px; color: var(--muted); text-align: center; }
+
+@media (max-width: 768px) {
+  .container { padding: 32px 20px; }
+  table { font-size: 12px; }
+  th, td { padding: 8px 10px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>API 差异对照表</h1>
+<p class="subtitle">QMT (迅投) vs PTrade (恒生) — 函数映射、数据接口、下单方式与迁移指南</p>
+<div class="meta-bar">
+  <span>版本: <strong>V10.0</strong></span>
+  <span>日期: <strong>2026-07-31</strong></span>
+  <span>适用: <strong>V10 策略双平台</strong></span>
+</div>
+
+<h2>一、核心函数映射表</h2>
+<table>
+<thead><tr><th style="width:16%">功能</th><th style="width:30%">QMT (迅投 / xtquant)</th><th style="width:30%">PTrade (恒生)</th><th style="width:24%">差异说明</th></tr></thead>
+<tbody>
+<tr><td>初始化入口</td><td><code>def init(ContextInfo):</code></td><td><code>def initialize(context):</code></td><td>QMT 传入 ContextInfo 对象；PTrade 传入 context 对象，属性结构不同</td></tr>
+<tr><td>Bar 驱动</td><td><code>def handlebar(ContextInfo):</code></td><td><code>def handle_data(context, data):</code></td><td>QMT 每 K 线触发；PTrade 每分钟触发 (含 Tick 级)，需用 <code>context.bar_dt</code> 控制频率</td></tr>
+<tr><td>定时任务</td><td><code>ContextInfo.run_time("func", "1d", "0930")</code></td><td><code>scheduler.run_daily(func, time="09:30")</code></td><td>QMT 在 init 中注册；PTrade 用独立 scheduler 模块</td></tr>
+<tr><td>下单 — 按数量</td><td><code>pass_order(0, 1101, acc, code, 14, vol, price, ContextInfo)</code></td><td><code>order_value(security, value, price=None)</code> / <code>order(security, amount)</code></td><td>QMT 需 7 个参数编码；PTrade 语义化接口，按金额或按数量</td></tr>
+<tr><td>下单 — 按金额</td><td>需手动计算：<code>vol = int(amount / price / 100) * 100</code></td><td><code>order_value(security, value)</code></td><td>PTrade 直接传金额；QMT 无按金额下单接口</td></tr>
+<tr><td>撤单</td><td><code>cancel(security, acc, ContextInfo)</code></td><td><code>cancel_order(order_id)</code></td><td>QMT 按标的撤单；PTrade 按订单 ID 撤单</td></tr>
+<tr><td>撤全部委托</td><td>需遍历持仓标的逐一撤单</td><td><code>cancel_order("all")</code> 或遍历 <code>get_orders()</code></td><td>PTrade 支持批量撤单</td></tr>
+<tr><td>获取持仓</td><td><code>ContextInfo.get_stock_positions_in_account(acc, 0)</code></td><td><code>context.portfolio.positions</code></td><td>QMT 返回字典列表；PTrade 返回 Position 对象字典</td></tr>
+<tr><td>获取账户信息</td><td><code>ContextInfo.get_account(acc, 0)</code></td><td><code>context.portfolio</code></td><td>QMT 返回 Account 对象；PTrade 直接从 context 访问</td></tr>
+<tr><td>获取行情 — K线</td><td><code>ContextInfo.get_market_data(["close"], stock_code=code, count=15)</code></td><td><code>get_bars(security, count, unit="1d", fields=["close"])</code></td><td>QMT 返回 DataFrame；PTrade 返回 ndarray，字段名有差异</td></tr>
+<tr><td>获取行情 — 实时</td><td><code>ContextInfo.get_full_tick([code])</code></td><td><code>get_current_data()</code></td><td>QMT 返回 Tick 字典；PTrade 返回 CurrentData 对象</td></tr>
+<tr><td>日志输出</td><td><code>print("msg")</code> 或 <code>ContextInfo.do_log(level, msg)</code></td><td><code>log.info("msg")</code> / <code>log.error("msg")</code></td><td>QMT print 输出到终端；PTrade 用 logging 模块，分级更清晰</td></tr>
+</tbody>
+</table>
+
+<h2>二、数据接口差异</h2>
+<table>
+<thead><tr><th style="width:20%">维度</th><th style="width:38%">QMT (迅投)</th><th style="width:38%">PTrade (恒生)</th></tr></thead>
+<tbody>
+<tr><td>标的代码格式</td><td><code>600519.SH</code> / <code>000001.SZ</code>；ETF: <code>510300.SH</code></td><td><code>600519.XSHG</code> / <code>000001.XSHE</code>；ETF: <code>510300.XSHG</code></td></tr>
+<tr><td>日期格式</td><td><code>"2026-07-31"</code> 字符串或 <code>datetime</code> 对象</td><td><code>"2026-07-31"</code> 字符串，支持 <code>str</code> / <code>datetime.date</code></td></tr>
+<tr><td>K线字段名</td><td><code>time, open, high, low, close, volume, amount</code></td><td><code>date, open, high, low, close, volume, money</code></td></tr>
+<tr><td>持仓字段名</td><td><code>m_nVolume</code> (持仓量), <code>m_dOpenCost</code> (成本价), <code>m_dProfit</code> (盈亏)</td><td><code>total_amount</code> (持仓量), <code>avg_cost</code> (成本价), <code>value</code> (市值)</td></tr>
+<tr><td>账户字段名</td><td><code>m_dBalance</code> (总资产), <code>m_dAvailable</code> (可用), <code>m_dPosition</code> (持仓市值)</td><td><code>total_value</code> (总资产), <code>available_cash</code> (可用), <code>positions_value</code> (持仓市值)</td></tr>
+<tr><td>行情订阅</td><td>需在 init 中 <code>ContextInfo.set_universe([code])</code> 订阅</td><td>自动订阅 <code>context.universe</code> 中的标的，也可手动 <code>subscribe()</code></td></tr>
+</tbody>
+</table>
+
+<h2>三、下单方式差异</h2>
+<table>
+<thead><tr><th style="width:18%">维度</th><th style="width:38%">QMT — pass_order</th><th style="width:38%">PTrade — order 系列</th></tr></thead>
+<tbody>
+<tr><td>函数签名</td><td><code>pass_order(op_type, order_type, accountid, ordercode, pricetype, volume, price, ContextInfo)</code></td><td><code>order(security, amount, price=None)</code><br><code>order_value(security, value, price=None)</code><br><code>order_target(security, target_amount)</code><br><code>order_target_value(security, target_value)</code></td></tr>
+<tr><td>买卖方向</td><td><code>0</code> = 买入, <code>1</code> = 卖出 (op_type 参数)</td><td><code>amount &gt; 0</code> 买入, <code>amount &lt; 0</code> 卖出；或使用 <code>order_target</code> 自动判断</td></tr>
+<tr><td>价格类型</td><td><code>14</code> = 限价, <code>11</code> = 市价, <code>5</code> = 最新价 (pricetype 参数)</td><td><code>price=None</code> → 市价；<code>price=X</code> → 限价；无独立价格类型枚举</td></tr>
+<tr><td>下单数量</td><td>必须为 100 的整数倍 (A 股)，手动取整</td><td>必须为 100 的整数倍，系统自动取整或报错</td></tr>
+<tr><td>订单回报</td><td>异步回报，需通过 <code>ContextInfo.callback</code> 回调获取</td><td>同步返回 Order 对象，含 <code>order_id</code>、<code>filled</code>、<code>avg_fill_price</code></td></tr>
+<tr><td>调仓至目标仓位</td><td>需手动计算差值，分别调用 pass_order 买/卖</td><td><code>order_target_value(security, target_value)</code> 一步完成</td></tr>
+</tbody>
+</table>
+<div class="section-note"><strong>核心差异总结：</strong>QMT 的 <code>pass_order</code> 采用魔数编码，7 参数强类型，学习曲线陡峭但控制力强；PTrade 的 <code>order</code> 系列语义化程度更高，尤其 <code>order_target_value</code> 大幅简化调仓逻辑。迁移时需重点处理编码转换与数量取整逻辑差异。</div>
+
+<h2>四、注意事项</h2>
+<ol class="notice-list">
+<li><span class="platform qmt">QMT</span> <code>pass_order</code> 的 <code>pricetype</code> 参数在不同券商版本中枚举值可能不同。部分券商版本中市价为 <code>5</code> 而非 <code>11</code>，需在部署前与券商确认枚举映射。</li>
+<li><span class="platform ptrade">PTrade</span> <code>handle_data</code> 默认每分钟触发一次，若策略仅需日级别运行，必须用 <code>context.bar_dt</code> 或 <code>scheduler.run_daily</code> 做频率控制，否则会重复下单。</li>
+<li><span class="platform qmt">QMT</span> 行情数据在 <code>handlebar</code> 中通过 <code>ContextInfo.get_market_data</code> 获取时，历史 K 线的 <code>count</code> 参数受 <code>set_universe</code> 订阅范围限制，未订阅标的返回空值。</li>
+<li><span class="platform ptrade">PTrade</span> <code>get_bars</code> 返回的日期字段是 <code>date</code> 而非 <code>time</code>，且 <code>amount</code> 字段名为 <code>money</code>，迁移时字段名映射必须逐项核对。</li>
+<li><span class="platform both">双平台</span> A 股下单数量必须为 100 的整数倍。QMT 不会自动取整，传入非整数倍数量会报错；PTrade 部分版本会自动向下取整但不保证一致性，建议统一在策略层做 <code>int(vol / 100) * 100</code> 处理。</li>
+<li><span class="platform qmt">QMT</span> <code>ContextInfo.do_log</code> 的日志级别用整数表示 (0=INFO, 1=WARN, 2=ERROR, 3=FATAL)，而非字符串。直接 <code>print</code> 的输出在服务端运行时不可见，必须用 <code>do_log</code>。</li>
+<li><span class="platform ptrade">PTrade</span> <code>context.portfolio.positions</code> 仅返回当前持仓标的，已清仓标的不在字典中。若需查询历史持仓，需从 <code>get_orders()</code> 重建。</li>
+<li><span class="platform both">双平台</span> ETF 交易费率与最小变动价位与股票不同。ETF 最小变动单位为 0.001 元 (股票为 0.01 元)，下单价格精度需注意。部分 ETF 有涨跌幅限制 (±10%)，跨境 ETF 限制可能不同。</li>
+<li><span class="platform qmt">QMT</span> 断线重连后 <code>ContextInfo</code> 对象可能被重建，策略中不应将 <code>ContextInfo</code> 存入全局变量，应始终通过函数参数传递。</li>
+<li><span class="platform ptrade">PTrade</span> 策略上传后编译发生在服务端，错误信息可能不够详细。建议在本地 Python 环境先做语法检查，注意 PTrade 的 Python 版本可能为 3.6，部分 3.8+ 语法 (如 walrus operator) 不可用。</li>
+</ol>
+
+<h2>五、迁移建议：从 QMT 迁到 PTrade</h2>
+<div class="migration-steps">
+<div class="migration-step"><div class="migration-num"></div><div class="migration-body"><h3>重写生命周期函数</h3><p>将 <code>init(ContextInfo)</code> 改为 <code>initialize(context)</code>，<code>handlebar(ContextInfo)</code> 改为 <code>handle_data(context, data)</code>。全局变量存储方式从 <code>ContextInfo.X = value</code> 改为 <code>context.X = value</code> 或使用 <code>g.</code> 全局对象。</p></div></div>
+<div class="migration-step"><div class="migration-num"></div><div class="migration-body"><h3>替换标的代码格式</h3><p>编写 <code>code_convert(code)</code> 工具函数：将 <code>.SH</code> → <code>.XSHG</code>，<code>.SZ</code> → <code>.XSHE</code>。在 <code>config.json</code> 中统一存储一种格式，运行时按平台转换。批量替换 32 只 ETF 代码。</p></div></div>
+<div class="migration-step"><div class="migration-num"></div><div class="migration-body"><h3>重写下单逻辑</h3><p>将 <code>pass_order(0, 1101, acc, code, 14, vol, price, ContextInfo)</code> 替换为 <code>order(code, vol, price=price)</code>。调仓逻辑用 <code>order_target_value(code, target_value)</code> 替代手动计算差值。撤单逻辑从按标的撤单改为按 <code>order_id</code> 撤单。</p></div></div>
+<div class="migration-step"><div class="migration-num"></div><div class="migration-body"><h3>适配行情与持仓接口</h3><p><code>get_market_data</code> → <code>get_bars</code>，注意字段名映射 (<code>time</code>→<code>date</code>, <code>amount</code>→<code>money</code>)。持仓接口从 <code>get_stock_positions_in_account</code> 改为 <code>context.portfolio.positions</code>，字段名从 <code>m_nVolume</code> 改为 <code>total_amount</code> 等。</p></div></div>
+<div class="migration-step"><div class="migration-num"></div><div class="migration-body"><h3>验证与对齐</h3><p>在 PTrade 模拟环境运行至少 5 个交易日，逐日对比 QMT 与 PTrade 的信号生成结果。重点关注：MA 计算数值是否一致、下单价格是否一致、持仓同步是否正确。偏差率应控制在 0.1% 以内。</p></div></div>
+</div>
+
+<footer>V10 多指数自适应趋势轮动策略 · API 差异对照表 · 生成于 2026-07-31</footer>
+</div>
+</body>
+</html>

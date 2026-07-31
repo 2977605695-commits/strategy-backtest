@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>部署交接文档 — V10 多指数自适应趋势轮动策略</title>
+<style>
+:root {
+  --gray: #3a3f4a; --navy: #2c3e50; --accent: #3498db;
+  --light-gray: #ecf0f1; --border: #d5dce3; --bg: #fafbfc;
+  --white: #ffffff; --muted: #7f8c8d; --danger: #e74c3c;
+  --success: #27ae60; --warn: #f39c12;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, "Segoe UI", sans-serif;
+  background: var(--bg); color: var(--gray); line-height: 1.7;
+  font-size: 15px; -webkit-font-smoothing: antialiased;
+}
+.container { max-width: 1000px; margin: 0 auto; padding: 48px 40px; }
+h1 { font-size: 28px; color: var(--navy); font-weight: 700; letter-spacing: -0.5px; margin-bottom: 4px; }
+h2 { font-size: 20px; color: var(--navy); font-weight: 600; margin-top: 48px; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); }
+h3 { font-size: 16px; color: var(--navy); font-weight: 600; margin-top: 24px; margin-bottom: 10px; }
+p { margin-bottom: 10px; }
+.subtitle { color: var(--muted); font-size: 14px; margin-bottom: 32px; }
+.meta-bar { display: flex; gap: 24px; padding: 12px 20px; background: var(--white); border: 1px solid var(--border); border-radius: 4px; margin-bottom: 40px; font-size: 13px; color: var(--muted); }
+.meta-bar span strong { color: var(--navy); }
+
+table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; background: var(--white); border: 1px solid var(--border); }
+th { background: var(--navy); color: var(--white); font-weight: 600; text-align: left; padding: 10px 14px; font-size: 13px; }
+td { padding: 10px 14px; border-bottom: 1px solid var(--border); font-size: 14px; vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+tr:nth-child(even) td { background: #f8f9fa; }
+code { background: var(--light-gray); padding: 2px 6px; border-radius: 3px; font-size: 13px; color: var(--navy); font-family: "SF Mono", "Cascadia Code", Consolas, monospace; }
+
+.steps { counter-reset: step; margin: 16px 0; }
+.step { display: flex; gap: 16px; margin-bottom: 16px; }
+.step-num { counter-increment: step; flex-shrink: 0; width: 32px; height: 32px; background: var(--accent); color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; }
+.step-num::before { content: counter(step); }
+.step-body h3 { margin-top: 4px; }
+.step-body p { font-size: 14px; }
+
+.checklist { list-style: none; margin: 12px 0; }
+.checklist li { padding: 8px 0 8px 32px; position: relative; font-size: 14px; border-bottom: 1px solid var(--border); }
+.checklist li:last-child { border-bottom: none; }
+.checklist li::before { content: ''; position: absolute; left: 0; top: 10px; width: 18px; height: 18px; border: 2px solid var(--border); border-radius: 3px; background: var(--white); }
+
+.monitor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+.monitor-card { background: var(--white); border: 1px solid var(--border); border-radius: 4px; padding: 16px 20px; }
+.monitor-card h3 { margin-top: 0; color: var(--accent); font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; }
+.monitor-card p { font-size: 13px; color: var(--gray); }
+
+.trouble-table td:nth-child(1) { color: var(--danger); font-weight: 600; width: 22%; }
+.trouble-table td:nth-child(2) { width: 33%; }
+.trouble-table td:nth-child(3) { width: 45%; }
+
+.emergency-box { background: #fdf5f5; border: 1px solid #e6b0b0; border-left: 4px solid var(--danger); border-radius: 4px; padding: 16px 20px; margin: 12px 0; }
+.emergency-box h3 { color: var(--danger); margin-top: 0; }
+.emergency-step { display: flex; gap: 12px; margin-bottom: 8px; font-size: 14px; }
+.emergency-step strong { color: var(--danger); flex-shrink: 0; }
+
+.file-tree { background: var(--white); border: 1px solid var(--border); border-radius: 4px; padding: 16px 20px; margin: 12px 0; font-size: 14px; }
+.file-tree .dir { color: var(--accent); font-weight: 600; }
+.file-tree .file { color: var(--gray); }
+.file-tree .desc { color: var(--muted); font-size: 13px; }
+
+footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 12px; color: var(--muted); text-align: center; }
+
+@media (max-width: 768px) {
+  .monitor-grid { grid-template-columns: 1fr; }
+  .container { padding: 32px 20px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>部署交接文档</h1>
+<p class="subtitle">V10 多指数自适应趋势轮动策略 — 生产环境部署与运维指南</p>
+<div class="meta-bar">
+  <span>版本: <strong>V10.0</strong></span>
+  <span>日期: <strong>2026-07-31</strong></span>
+  <span>平台: <strong>QMT / PTrade</strong></span>
+  <span>状态: <strong>待上线</strong></span>
+</div>
+
+<h2>一、环境要求</h2>
+<table>
+<thead><tr><th style="width:25%">类别</th><th>要求</th><th style="width:20%">备注</th></tr></thead>
+<tbody>
+<tr><td>Python 版本</td><td><code>3.8 - 3.10</code> (推荐 3.8)</td><td>QMT 环境内置</td></tr>
+<tr><td>QMT 版本</td><td>_xtquant 最新版 (需 ≥ 2025.06)</td><td>迅投官方客户端</td></tr>
+<tr><td>PTrade 版本</td><td>PT 2.x (证券版 / 机构版)</td><td>恒生电子</td></tr>
+<tr><td>核心依赖库</td><td><code>pandas ≥ 1.5</code>, <code>numpy ≥ 1.24</code>, <code>datetime</code>, <code>json</code>, <code>os</code>, <code>math</code></td><td>均为标准数据分析栈</td></tr>
+<tr><td>操作系统</td><td>Windows 10/11 64-bit</td><td>QMT 仅支持 Windows</td></tr>
+<tr><td>网络</td><td>交易时段稳定连接券商服务器</td><td>断线自动重连</td></tr>
+<tr><td>磁盘空间</td><td>≥ 500MB (含日志与台账)</td><td>SSD 优先</td></tr>
+</tbody>
+</table>
+
+<h2>二、安装步骤</h2>
+<div class="steps">
+<div class="step"><div class="step-num"></div><div class="step-body"><h3>获取策略代码</h3><p>从版本库 <code>v10_production/</code> 目录获取完整代码包，确认文件完整性 (共 7 个核心文件 + 2 个配置文件)。</p></div></div>
+<div class="step"><div class="step-num"></div><div class="step-body"><h3>配置参数文件</h3><p>编辑 <code>config.json</code>，设置以下关键字段：初始资金、ETF 池列表、MA 周期参数 (MA6/MA15/MA8)、交易时间窗口。确认券商账户信息在 QMT/PTrade 端已正确登录。</p></div></div>
+<div class="step"><div class="step-num"></div><div class="step-body"><h3>导入策略至交易平台</h3><p>QMT：将 <code>strategy_qmt.py</code> 导入迅投研究环境，编译通过后确认 <code>init</code> 函数正常调用。PTrade：将 <code>strategy_ptrade.py</code> 上传至 PTrade 策略管理界面，完成语法检查。</p></div></div>
+<div class="step"><div class="step-num"></div><div class="step-body"><h3>模拟盘验证</h3><p>在模拟环境中运行至少 5 个交易日，验证信号生成、下单执行、持仓更新、台账记录全链路正常。检查日志无 ERROR 级别输出。</p></div></div>
+<div class="step"><div class="step-num"></div><div class="step-body"><h3>正式上线</h3><p>模拟验证通过后，切换至实盘模式。首日运行需人工盯盘前 30 分钟，确认订单执行与预期一致。设置交易日 09:25 自动启动。</p></div></div>
+</div>
+
+<h2>三、上线前检查清单</h2>
+<ul class="checklist">
+<li>Python 环境版本确认 (<code>python --version</code> 输出 3.8-3.10)</li>
+<li>QMT/PTrade 客户端已登录且账户状态正常</li>
+<li><code>config.json</code> 参数与回测最终版本一致</li>
+<li>ETF 池 32 只标的全部可交易 (无停牌、无退市)</li>
+<li>初始资金与账户实际可用资金匹配</li>
+<li>日志目录 <code>logs/</code> 已创建且有写入权限</li>
+<li>台账文件 <code>ledger.csv</code> 初始化完成</li>
+<li>交易时间窗口设置正确 (09:30-11:30, 13:00-15:00)</li>
+<li>风控参数已配置 (单标的最大仓位、止损线)</li>
+<li>模拟盘 ≥5 日运行无异常，日志无 ERROR</li>
+</ul>
+
+<h2>四、日常监控要点</h2>
+<div class="monitor-grid">
+<div class="monitor-card"><h3>日志位置</h3><p><code>logs/strategy_YYYYMMDD.log</code></p><p>每日生成独立日志文件，记录信号生成、下单、持仓变动、异常信息。</p></div>
+<div class="monitor-card"><h3>台账位置</h3><p><code>ledger/ledger.csv</code></p><p>记录每笔交易：日期、标的、方向、数量、价格、持仓变化。每日收盘后自动追加。</p></div>
+<div class="monitor-card"><h3>关键指标 — 每日检查</h3><p>· 持仓标的数量 (预期 1-5 只)<br>· 当日交易笔数 (预期 0-3 笔)<br>· 账户总资产与台账一致<br>· 日志中无未捕获异常</p></div>
+<div class="monitor-card"><h3>关键指标 — 每周检查</h3><p>· 周收益率与基准对比<br>· 累计回撤是否触及警戒线 (>30%)<br>· 换手率是否在合理区间<br>· 台账余额与券商端一致</p></div>
+</div>
+
+<h2>五、常见异常排查指南</h2>
+<table class="trouble-table">
+<thead><tr><th>异常现象</th><th>可能原因</th><th>处理方法</th></tr></thead>
+<tbody>
+<tr><td>策略未产生信号</td><td>行情数据未更新；MA 计算窗口不足；非交易时段</td><td>检查 QMT/PTrade 行情订阅状态；确认 K 线数据已加载 ≥15 根；核对当前时间</td></tr>
+<tr><td>下单失败</td><td>账户资金不足；标的停牌；超出涨跌停限制；权限不足</td><td>查看券商端错误码；确认账户可用资金；检查标的状态；核实交易权限</td></tr>
+<tr><td>持仓数据不一致</td><td>部分成交未更新；网络延迟导致查询超时；台账写入失败</td><td>手动同步券商端持仓；检查网络连接；修复台账文件后重新对账</td></tr>
+<tr><td>日志中出现 KeyError</td><td>ETF 池配置有误；行情字段名变更；数据源返回空值</td><td>核对 config.json 中标的代码格式；检查行情接口返回字段；增加空值保护逻辑</td></tr>
+<tr><td>策略运行卡顿</td><td>历史数据加载过多；内存泄漏；同时运行多个策略实例</td><td>限制 K 线加载天数至 60 日；重启策略进程；关闭无关策略实例</td></tr>
+<tr><td>台账文件损坏</td><td>写入时进程被杀；磁盘空间不足；文件被其他程序占用</td><td>从 <code>ledger/backup/</code> 恢复最近备份；清理磁盘空间；确保单实例运行</td></tr>
+<tr><td>MA 斜率计算异常</td><td>数据缺失导致 MA 值跳跃；除零错误</td><td>检查数据完整性；增加异常值过滤；确认 MA8 斜率分母不为零的保护逻辑</td></tr>
+<tr><td>QMT 断线无自动重连</td><td>网络波动；QMT 客户端崩溃；session 过期</td><td>重启 QMT 客户端并重新登录；检查网络稳定性；策略中加入重连检测逻辑</td></tr>
+</tbody>
+</table>
+
+<h2>六、紧急停止与回滚流程</h2>
+<div class="emergency-box">
+<h3>⚠ 紧急停止流程</h3>
+<div class="emergency-step"><strong>步骤 1：</strong> 在 QMT/PTrade 端点击「停止策略」按钮，策略将在当前 K 线结束后停止运行。</div>
+<div class="emergency-step"><strong>步骤 2：</strong> 手动撤销所有未成交委托 (QMT: 撤单按钮 / PTrade: 撤单页面)。</div>
+<div class="emergency-step"><strong>步骤 3：</strong> 记录当前持仓状态，截图保存券商端持仓页面。</div>
+<div class="emergency-step"><strong>步骤 4：</strong> 通知相关负责人，说明停止原因与预计恢复时间。</div>
+<p style="margin-top:8px; font-size:13px; color:var(--muted);">预计耗时：3-5 分钟</p>
+</div>
+
+<div class="emergency-box" style="background:#f5f8fa; border-color:#b0c4de; border-left-color:var(--accent);">
+<h3 style="color:var(--accent);">↩ 回滚流程</h3>
+<div class="emergency-step"><strong style="color:var(--accent);">步骤 1：</strong> 确认回滚版本号，从版本库获取上一稳定版本代码包。</div>
+<div class="emergency-step"><strong style="color:var(--accent);">步骤 2：</strong> 备份当前 <code>config.json</code>、<code>ledger/</code> 目录、<code>logs/</code> 目录。</div>
+<div class="emergency-step"><strong style="color:var(--accent);">步骤 3：</strong> 替换策略代码文件，恢复备份的配置与台账。</div>
+<div class="emergency-step"><strong style="color:var(--accent);">步骤 4：</strong> 在模拟环境验证回滚版本运行正常 (≥1 交易日)。</div>
+<div class="emergency-step"><strong style="color:var(--accent);">步骤 5：</strong> 确认无误后切换至实盘，人工盯盘前 30 分钟。</div>
+<p style="margin-top:8px; font-size:13px; color:var(--muted);">预计耗时：30-60 分钟 (含模拟验证)</p>
+</div>
+
+<h2>七、文件结构说明</h2>
+<div class="file-tree">
+<p><span class="dir">v10_production/</span></p>
+<p style="margin-left:20px;"><span class="file">strategy_qmt.py</span> — <span class="desc">QMT 平台策略主文件，含 init/handlebar 生命周期</span></p>
+<p style="margin-left:20px;"><span class="file">strategy_ptrade.py</span> — <span class="desc">PTrade 平台策略主文件，含 initialize/handle_data 生命周期</span></p>
+<p style="margin-left:20px;"><span class="file">config.json</span> — <span class="desc">策略参数配置：ETF 池、MA 周期、资金、风控</span></p>
+<p style="margin-left:20px;"><span class="file">indicators.py</span> — <span class="desc">技术指标计算模块：MA、MA 斜率、趋势判断</span></p>
+<p style="margin-left:20px;"><span class="file">signal_engine.py</span> — <span class="desc">信号引擎：多指数自适应轮动逻辑核心</span></p>
+<p style="margin-left:20px;"><span class="file">risk_manager.py</span> — <span class="desc">风控模块：仓位管理、止损、最大回撤保护</span></p>
+<p style="margin-left:20px;"><span class="file">utils.py</span> — <span class="desc">工具函数：日期处理、代码格式转换、日志封装</span></p>
+<p style="margin-left:20px;"><span class="dir">logs/</span> — <span class="desc">运行日志目录，每日一个文件</span></p>
+<p style="margin-left:20px;"><span class="dir">ledger/</span> — <span class="desc">交易台账目录，含 ledger.csv 和 backup/ 子目录</span></p>
+<p style="margin-left:20px;"><span class="dir">docs/</span> — <span class="desc">文档目录：本文件及 API 差异对照表、回测报告</span></p>
+<p style="margin-left:20px;"><span class="dir">backtest/</span> — <span class="desc">回测脚本与历史结果存档</span></p>
+</div>
+
+<footer>V10 多指数自适应趋势轮动策略 · 部署交接文档 · 生成于 2026-07-31</footer>
+</div>
+</body>
+</html>

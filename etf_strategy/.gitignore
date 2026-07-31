@@ -1,0 +1,12 @@
+# 运行时文件
+logs/*.log
+logs/*.csv
+logs/rollback_*.json
+*.db
+__pycache__/
+*.pyc
+*.py.bak
+
+# 保留目录结构
+!logs/.gitkeep
+!docs/
