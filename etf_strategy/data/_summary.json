@@ -1,0 +1,8 @@
+{
+  "fetch_date": "2026-07-23",
+  "source": "AkShare (stock_zh_a_hist qfq)",
+  "period": "20200101~20260723",
+  "total": 70,
+  "success": 70,
+  "failed": []
+}
